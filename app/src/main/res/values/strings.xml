@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">twentyquestions</string>
+    <string name="app_name">Twenty Questions</string>
     <string name="button">Next Question</string>
 </resources>

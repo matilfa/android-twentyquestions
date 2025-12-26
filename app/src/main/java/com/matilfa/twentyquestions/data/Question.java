@@ -7,10 +7,9 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Question {
     @PrimaryKey
-    @ColumnInfo(name = "Question_id")
     public int id;
 
-    @ColumnInfo(name = "Question_text")
+    @ColumnInfo(name = "text")
     public String text;
 
 }
