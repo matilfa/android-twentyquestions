@@ -29,8 +29,12 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class MainActivity extends AppCompatActivity {
 //    private Locale locale;
@@ -38,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
     private QuestionDatabase db;
     private QuestionDao questionDao;
+
+    public List<String> allQuestions = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,42 +61,57 @@ public class MainActivity extends AppCompatActivity {
 
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+        try {
+            ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+                Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
 
-//            setup();
-            String q;
-            AssetManager am = this.getAssets();
-            InputStream is = null;
-            try {
-                is = am.open("questions-data.txt");
-                BufferedReader br = new BufferedReader(new InputStreamReader(is));
-                q = br.readLine();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+                //            setup();
+                AssetManager am = this.getAssets();
+                try {
+                    InputStream is = am.open("questions-data.txt");
 
+                    BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-            Button nextButton = findViewById(R.id.nextQuestionButton);
-
-            nextButton.setText(R.string.button);
-            nextButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String question = generateRandomQuestion();
-
-                    TextView questionTextLabel = findViewById(R.id.questionText);
-
-
-                    questionTextLabel.setText(q);
+                    String line = br.readLine();
+                    while (line != null) {
+                        allQuestions.add(line);
+                        line = br.readLine();
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
+
+
+                Button nextButton = findViewById(R.id.nextQuestionButton);
+
+                nextButton.setText(R.string.button);
+                nextButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                                            int randomNo = ThreadLocalRandom
+                                                    .current()
+                                                    .nextInt(0, allQuestions.size());
+
+                        String question = allQuestions.get(randomNo);
+
+                        TextView questionTextLabel = findViewById(R.id.questionText);
+
+
+                        questionTextLabel.setText(question);
+                    }
+                });
+
+
+                return insets;
             });
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
+    }
 
-
-            return insets;
-        });
+    private void populateQuestionsList() {
 
     }
 
@@ -136,10 +157,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String generateRandomQuestion() {
-//        ThreadLocalRandom rand =
+        int randomNo = ThreadLocalRandom
+                .current()
+                .nextInt(0, allQuestions.size());
+
 
 //        return getById(1);
-        return null;
+        return allQuestions.get(randomNo);
     }
 
 
