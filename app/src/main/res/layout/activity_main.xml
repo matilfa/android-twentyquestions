@@ -24,7 +24,7 @@
         android:layout_marginStart="64dp"
         android:layout_marginTop="140dp"
         android:layout_marginEnd="264dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintBottom_toTopOf="@+id/nextQuestionButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
