@@ -1,6 +1,8 @@
 package com.matilfa.twentyquestions.data;
 
 import androidx.room.Dao;
+import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import java.util.List;
@@ -12,4 +14,7 @@ public interface QuestionDao {
 
     @Query("SELECT * FROM question WHERE id = :id")
     Question getById(int id);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertAll(List<Question> questions);
 }
