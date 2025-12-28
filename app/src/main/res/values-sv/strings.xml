@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">Tjugo Frågor</string>
     <string name="button">Nästa fråga</string>
+    <string name="displayed_question">%1$d. %2$s</string>
 </resources>

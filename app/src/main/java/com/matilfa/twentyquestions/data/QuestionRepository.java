@@ -6,6 +6,8 @@ import android.widget.TextView;
 
 import androidx.room.Room;
 
+import com.matilfa.twentyquestions.R;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -59,7 +61,10 @@ public class QuestionRepository {
                 var question = questionDao.getById(randomNo);
 
                 questionText.post(() ->
-                        questionText.setText(question.text));
+                        questionText.setText(context.getResources().getString(
+                                R.string.displayed_question,
+                                question.id,
+                                question.text)));
             }
         }).start();
 
