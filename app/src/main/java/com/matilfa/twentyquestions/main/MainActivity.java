@@ -4,14 +4,12 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.room.Room;
 
 import com.matilfa.twentyquestions.R;
 import com.matilfa.twentyquestions.data.Question;
@@ -25,8 +23,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MainActivity extends AppCompatActivity {
@@ -56,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Button nextButton = findViewById(R.id.nextQuestionButton);
 
-                nextButton.setText(R.string.button);
+                nextButton.setText(R.string.newQuestionButton);
                 nextButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

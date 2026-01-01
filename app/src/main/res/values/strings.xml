@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Twenty Questions</string>
-    <string name="button">New Question</string>
+    <string name="newQuestionButton">New Question</string>
     <string name="displayed_question">%1$d. %2$s</string>
+
+    <string name="quickStartButton">Start random questions</string>
+    <string name="sessionModeButton">Run session mode</string>
+    <string name="settingsButton">Settings</string>
 </resources>
