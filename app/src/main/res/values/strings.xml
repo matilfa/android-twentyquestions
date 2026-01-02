@@ -1,9 +1,16 @@
 <resources>
+    <!--    In MainActivity-->
     <string name="app_name">Twenty Questions</string>
     <string name="newQuestionButton">New Question</string>
     <string name="displayed_question">%1$d. %2$s</string>
 
+    <!--    In StartScreenActivity-->
     <string name="quickStartButton">Start random questions</string>
     <string name="sessionModeButton">Run session mode</string>
     <string name="settingsButton">Settings</string>
+
+    <!--    In SessionSetupActivity-->
+    <string name="sessionSettingsTitle">Session Settings</string>
+    <string name="loadSessionButton">Load session</string>
+    <string name="newSessionButton">Start new session</string>
 </resources>

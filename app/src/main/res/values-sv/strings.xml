@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--    In MainActivity-->
     <string name="app_name">Tjugo Frågor</string>
     <string name="newQuestionButton">Ny fråga</string>
     <string name="displayed_question">%1$d. %2$s</string>
 
+    <!--    In StartScreenActivity-->
     <string name="quickStartButton">Börja slumpa frågor</string>
     <string name="sessionModeButton">Kör i sessionsläge</string>
     <string name="settingsButton">Inställningar</string>
+
+<!--    In SessionSetupActivity-->
+    <string name="sessionSettingsTitle">Sessionsinställningar</string>
+    <string name="loadSessionButton">Fortsätt tidigare session</string>
+    <string name="newSessionButton">Starta ny session</string>
+
 </resources>
