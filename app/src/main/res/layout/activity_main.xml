@@ -14,6 +14,7 @@
         android:layout_marginBottom="256dp"
         android:paddingHorizontal="24dp"
         android:paddingVertical="24dp"
+        android:text="@string/newQuestionButton"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Twentyquestions">
         <activity
-            android:name=".main.StartScreenActivity"
+            android:name=".main.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".main.MainActivity"
+            android:name=".main.StartScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

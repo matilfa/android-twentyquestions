@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
 
                 Button nextButton = findViewById(R.id.nextQuestionButton);
 
-                nextButton.setText(R.string.newQuestionButton);
                 nextButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
