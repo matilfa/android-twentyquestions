@@ -1,4 +1,4 @@
-package com.matilfa.twentyquestions.data;
+package com.matilfa.twentyquestions.data.questions;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;

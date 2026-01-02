@@ -1,4 +1,4 @@
-package com.matilfa.twentyquestions.data;
+package com.matilfa.twentyquestions.data.questions;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
