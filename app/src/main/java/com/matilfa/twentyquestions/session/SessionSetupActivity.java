@@ -1,8 +1,6 @@
 package com.matilfa.twentyquestions.session;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,21 +13,33 @@ import com.matilfa.twentyquestions.R;
 
 public class SessionSetupActivity extends AppCompatActivity {
 
+    public SessionSetupActivity() {
+        super(R.layout.activity_session_setup);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_session_setup);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-
-            Fragment mainFragment = new SessionMainFragment();
-
-            var fragmentManager = getSupportFragmentManager();
-            var fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.sessionSettingsFl, mainFragment)
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .add(R.id.fragmentContainerView, SessionFragment.class, null)
                     .commit();
+        }
+
+            EdgeToEdge.enable(this);
+            setContentView(R.layout.activity_session_setup);
+            ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+                Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+
+
+//            Fragment mainFragment = new SessionFragment();
+//
+//            var fragmentManager = getSupportFragmentManager();
+//            var fragmentTransaction = fragmentManager.beginTransaction();
+//            fragmentTransaction.replace(R.id.sessionSettingsFl, mainFragment)
+//                    .commit();
 
 //            Fragment loadSessionFragment = new LoadSessionFragment();
 //
@@ -46,9 +56,8 @@ public class SessionSetupActivity extends AppCompatActivity {
 //                }
 //            });
 
-//            Toast.makeText(this, "Hello again :D", Toast.LENGTH_SHORT).show();
 
-            return insets;
-        });
+                return insets;
+            });
+        }
     }
-}

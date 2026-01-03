@@ -47,4 +47,8 @@ dependencies {
 
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
+
+    //For fragments
+    val fragment_version = "1.8.9"
+    implementation("androidx.fragment:fragment:${fragment_version}")
 }
