@@ -13,4 +13,6 @@
     <string name="sessionSettingsTitle">Session Settings</string>
     <string name="loadSessionButton">Load session</string>
     <string name="newSessionButton">Start new session</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

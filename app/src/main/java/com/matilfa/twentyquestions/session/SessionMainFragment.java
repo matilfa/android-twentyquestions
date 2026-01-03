@@ -2,11 +2,15 @@ package com.matilfa.twentyquestions.session;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.matilfa.twentyquestions.R;
 
@@ -56,11 +60,31 @@ public class SessionMainFragment extends Fragment {
 //            mParam2 = getArguments().getString(ARG_PARAM2);
 //        }
 //    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_session_main, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        Fragment loadSessionFragment = new LoadSessionFragment();
+        Button loadSessionButton = view.findViewById(R.id.loadSessionButton);
+
+        loadSessionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                var fragmentManager = get
+//                var fragmentTransaction = fragmentManager.beginTransaction();
+//
+//                fragmentTransaction.replace(R.id.sessionSettingsFl, loadSessionFragment);
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.commit();
+            }
+        });
+
     }
 }

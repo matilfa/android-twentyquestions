@@ -12,6 +12,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.matilfa.twentyquestions.R;
+import com.matilfa.twentyquestions.session.SessionSetupActivity;
 
 public class StartScreenActivity extends AppCompatActivity {
 
@@ -29,6 +30,14 @@ public class StartScreenActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                }
+            });
+
+            Button sessionModeButton = findViewById(R.id.sessionModeButton);
+            sessionModeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getApplicationContext(), SessionSetupActivity.class));
                 }
             });
 
