@@ -14,19 +14,18 @@ import android.view.ViewGroup;
 import com.matilfa.twentyquestions.R;
 import com.matilfa.twentyquestions.session.models.SessionViewModel;
 
-
-public class LoadSessionFragment extends Fragment implements SessionFragment {
+public class NewSessionFragment extends Fragment {
     private SessionViewModel viewModel;
 
-    public LoadSessionFragment() {
-        super(R.layout.fragment_load_session);
+    public NewSessionFragment() {
+        super(R.layout.fragment_new_session);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_load_session, container, false);
+        return inflater.inflate(R.layout.fragment_new_session, container, false);
     }
 
     @Override

@@ -15,4 +15,7 @@
     <string name="loadSessionButton">Fortsätt tidigare session</string>
     <string name="newSessionButton">Starta ny session</string>
 
+    <string name="savedSessions">Sparade sessioner</string>
+    <string name="inputSessionNameText">Sessionens namn</string>
+
 </resources>

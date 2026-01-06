@@ -7,11 +7,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.matilfa.twentyquestions.R;
+import com.matilfa.twentyquestions.session.models.SessionViewModel;
 
 public class SessionSetupActivity extends AppCompatActivity {
+
+    private SessionViewModel sessionViewModel;
 
     public SessionSetupActivity() {
         super(R.layout.activity_session_setup);
@@ -20,12 +23,23 @@ public class SessionSetupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sessionViewModel = new ViewModelProvider(this).get(SessionViewModel.class);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
+                    .add(R.id.sessionFragmentContainerView, TopSessionFragment.class, null, "topFrag")
+//                    .add(R.id.sessionFragmentContainerView, LoadSessionFragment.class, null, "loadSessionFrag")
                     .setReorderingAllowed(true)
-                    .add(R.id.fragmentContainerView, SessionFragment.class, null)
-                    .commit();
+                    .replace(R.id.sessionFragmentContainerView, new TopSessionFragment())
+                    .commit(); //Todo add to backstack?
         }
+
+        sessionViewModel.getCurrentFragment().observe(this, fragment -> {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.sessionFragmentContainerView, fragment)
+                    .setReorderingAllowed(true)
+                    .addToBackStack(null)
+                    .commit();
+        });
 
             EdgeToEdge.enable(this);
             setContentView(R.layout.activity_session_setup);
