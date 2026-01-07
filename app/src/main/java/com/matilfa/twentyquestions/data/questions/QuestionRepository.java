@@ -7,6 +7,7 @@ import android.widget.TextView;
 import androidx.room.Room;
 
 import com.matilfa.twentyquestions.R;
+import com.matilfa.twentyquestions.data.TwentyQuestionsDatabase;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,7 +19,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class QuestionRepository {
     private Context context;
-    private QuestionDatabase db;
+    private TwentyQuestionsDatabase db;
     private QuestionDao questionDao;
     private List<Question> questions = new ArrayList<>();
 
@@ -36,7 +37,7 @@ public class QuestionRepository {
                 populateQuestionsList();
 
                 db = Room.databaseBuilder(context.getApplicationContext(),
-                        QuestionDatabase.class, "twentyQuestions.db").build();
+                        TwentyQuestionsDatabase.class, "twentyQuestions.db").build();
 
                 questionDao = db.questionDao();
                 questionDao.insertAll(questions);

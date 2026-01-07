@@ -12,9 +12,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.matilfa.twentyquestions.R;
+import com.matilfa.twentyquestions.data.TwentyQuestionsDatabase;
 import com.matilfa.twentyquestions.data.questions.Question;
 import com.matilfa.twentyquestions.data.questions.QuestionDao;
-import com.matilfa.twentyquestions.data.questions.QuestionDatabase;
 import com.matilfa.twentyquestions.data.questions.QuestionRepository;
 
 import java.io.BufferedReader;
@@ -27,7 +27,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class MainActivity extends AppCompatActivity {
     private QuestionRepository questionRepository;
-    private QuestionDatabase db;
+    private TwentyQuestionsDatabase db;
     private QuestionDao questionDao;
     private List<Question> questions = new ArrayList<>();
 
