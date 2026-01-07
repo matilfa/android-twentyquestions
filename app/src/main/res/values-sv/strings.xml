@@ -17,5 +17,7 @@
 
     <string name="savedSessions">Sparade sessioner</string>
     <string name="inputSessionNameText">Sessionens namn</string>
+    <string name="labelSessionMembers">Välj sessionsdeltagare</string>
+    <string name="createNewPlayerButton">Skapa ny användare</string>
 
 </resources>

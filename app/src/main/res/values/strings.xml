@@ -16,5 +16,8 @@
 
     <string name="savedSessions">Saved sessions</string>
     <string name="inputSessionNameText">Session name</string>
+    <string name="labelSessionMembers">Choose members for session</string>
+    <string name="createNewPlayerButton">Create a new member</string>
+
 
 </resources>
