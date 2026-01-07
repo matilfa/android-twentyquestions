@@ -27,11 +27,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class MainActivity extends AppCompatActivity {
     private QuestionRepository questionRepository;
-    private TwentyQuestionsDatabase db;
-    private QuestionDao questionDao;
-    private List<Question> questions = new ArrayList<>();
-
-    private List<String> allQuestions = new ArrayList<>();
+//    private TwentyQuestionsDatabase db;
+//    private QuestionDao questionDao;
+//    private List<Question> questions = new ArrayList<>();
+//
+//    private List<String> allQuestions = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,36 +69,36 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void populateQuestionsList() {
-        AssetManager am = this.getAssets();
-        try {
-            InputStream is = am.open("questions-data.txt");
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-
-            String line = br.readLine();
-            while (line != null) {
-                allQuestions.add(line);
-                line = br.readLine();
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        for (String q :
-                allQuestions) {
-            var question = new Question();
-            question.text = q;
-            questions.add(question);
-        }
-    }
-
-    private String generateRandomQuestion() {
-        int randomNo = ThreadLocalRandom
-                .current()
-                .nextInt(0, allQuestions.size());
-
-        return allQuestions.get(randomNo);
-    }
+//    private void populateQuestionsList() {
+//        AssetManager am = this.getAssets();
+//        try {
+//            InputStream is = am.open("questions-data.txt");
+//
+//            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+//
+//            String line = br.readLine();
+//            while (line != null) {
+//                allQuestions.add(line);
+//                line = br.readLine();
+//            }
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        for (String q :
+//                allQuestions) {
+//            var question = new Question();
+//            question.text = q;
+//            questions.add(question);
+//        }
+//    }
+//
+//    private String generateRandomQuestion() {
+//        int randomNo = ThreadLocalRandom
+//                .current()
+//                .nextInt(0, allQuestions.size());
+//
+//        return allQuestions.get(randomNo);
+//    }
 
 }

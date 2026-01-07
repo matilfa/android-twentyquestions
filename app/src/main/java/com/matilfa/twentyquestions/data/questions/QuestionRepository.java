@@ -4,10 +4,10 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.widget.TextView;
 
-import androidx.room.Room;
-
 import com.matilfa.twentyquestions.R;
 import com.matilfa.twentyquestions.data.TwentyQuestionsDatabase;
+import com.matilfa.twentyquestions.data.sessions.SessionDao;
+import com.matilfa.twentyquestions.data.users.UserDao;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,12 +18,14 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class QuestionRepository {
-    private Context context;
+    private final Context context;
     private TwentyQuestionsDatabase db;
     private QuestionDao questionDao;
-    private List<Question> questions = new ArrayList<>();
+    private SessionDao sessionDao;
+    private UserDao userDao;
+    private final List<Question> questions = new ArrayList<>();
 
-    private TextView questionText;
+    private final TextView questionText;
 
     public QuestionRepository(Context context, TextView questionText) {
         this.context = context;
@@ -31,22 +33,26 @@ public class QuestionRepository {
     }
 
     public void setup() {
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                populateQuestionsList();
+        if (questionDao == null || questions.isEmpty()) {
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
 
-                db = Room.databaseBuilder(context.getApplicationContext(),
-                        TwentyQuestionsDatabase.class, "twentyQuestions.db").build();
+                    db = TwentyQuestionsDatabase.getInstance(context.getApplicationContext());
 
-                questionDao = db.questionDao();
-                questionDao.insertAll(questions);
-            }
-        });
+                    questionDao = db.questionDao();
+                    sessionDao = db.sessionDao();
+                    userDao = db.userDao();
 
-        thread.start();
-//        thread.join(1000);
+                    if (questions.isEmpty()) {
+                        populateQuestionsList();
+                        questionDao.insertAll(questions);
+                    }
+                }
+            });
 
+            thread.start();
+        }
     }
 
     public void generateRandomQuestion() {
