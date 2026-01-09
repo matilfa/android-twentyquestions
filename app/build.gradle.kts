@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    kotlin("plugin.serialization") version "2.0.21"
 }
 
 android {
@@ -42,6 +43,8 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
+    implementation(platform("androidx.compose:compose-bom:2025.12.01"))
+
     //For database:
     val room_version = "2.8.4"
 
@@ -51,4 +54,19 @@ dependencies {
     //For fragments
     val fragment_version = "1.8.9"
     implementation("androidx.fragment:fragment:${fragment_version}")
+
+    //For navigation
+    val nav_version = "2.9.6"
+
+    implementation("androidx.navigation:navigation-fragment:$nav_version")
+    implementation("androidx.navigation:navigation-ui:$nav_version")
+
+    // Feature module support for Fragments
+    implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
+
+    // Testing Navigation
+    androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
+
+    // JSON serialization library, works with the Kotlin serialization plugin
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
 }

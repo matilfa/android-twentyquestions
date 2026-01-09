@@ -18,6 +18,11 @@
     <string name="savedSessions">Sparade sessioner</string>
     <string name="inputSessionNameText">Sessionens namn</string>
     <string name="labelSessionMembers">Välj sessionsdeltagare</string>
-    <string name="createNewPlayerButton">Skapa ny användare</string>
+    <string name="createNewUserButton">Skapa ny användare</string>
+
+    <string name="newUserDialogTitle">Skapa ny användare</string>
+    <string name="newNameInputFieldEt">Skriv in ett namn</string>
+    <string name="createUserDialogPositiveButton">Skapa</string>
+    <string name="createUserDialogNegativeButton">Avbryt</string>
 
 </resources>

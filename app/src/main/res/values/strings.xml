@@ -17,7 +17,11 @@
     <string name="savedSessions">Saved sessions</string>
     <string name="inputSessionNameText">Session name</string>
     <string name="labelSessionMembers">Choose members for session</string>
-    <string name="createNewPlayerButton">Create a new member</string>
+    <string name="createNewUserButton">Create a new member</string>
 
+    <string name="newUserDialogTitle">Create new user</string>
+    <string name="newNameInputFieldEt">Enter a name</string>
+    <string name="createUserDialogPositiveButton">Create</string>
+    <string name="createUserDialogNegativeButton">Cancel</string>
 
 </resources>
