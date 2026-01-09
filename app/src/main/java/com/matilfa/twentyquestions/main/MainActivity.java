@@ -1,6 +1,5 @@
 package com.matilfa.twentyquestions.main;
 
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,18 +11,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.matilfa.twentyquestions.R;
-import com.matilfa.twentyquestions.data.TwentyQuestionsDatabase;
-import com.matilfa.twentyquestions.data.questions.Question;
-import com.matilfa.twentyquestions.data.questions.QuestionDao;
 import com.matilfa.twentyquestions.data.questions.QuestionRepository;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class MainActivity extends AppCompatActivity {
     private QuestionRepository questionRepository;
@@ -41,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         try {
-            ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.session_setup), (v, insets) -> {
                 Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
                 v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
 

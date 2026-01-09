@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/topSessionFragment2">
+
+    <fragment
+        android:id="@+id/topSessionFragment2"
+        android:name="com.matilfa.twentyquestions.session.TopSessionFragment"
+        android:label="fragment_session_top"
+        tools:layout="@layout/fragment_session_top" >
+        <action
+            android:id="@+id/action_topSessionFragment2_to_loadSessionFragment"
+            app:destination="@id/loadSessionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loadSessionFragment"
+        android:name="com.matilfa.twentyquestions.session.LoadSessionFragment"
+        android:label="fragment_load_session"
+        tools:layout="@layout/fragment_load_session" />
+    <fragment
+        android:id="@+id/newSessionFragment"
+        android:name="com.matilfa.twentyquestions.session.NewSessionFragment"
+        android:label="fragment_new_session"
+        tools:layout="@layout/fragment_new_session" />
+
 
 </navigation>
