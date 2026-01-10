@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_topSessionFragment2_to_loadSessionFragment"
             app:destination="@id/loadSessionFragment" />
+        <action
+            android:id="@+id/action_topSessionFragment2_to_newSessionFragment"
+            app:destination="@id/newSessionFragment" />
     </fragment>
     <fragment
         android:id="@+id/loadSessionFragment"
@@ -24,6 +27,14 @@
         android:name="com.matilfa.twentyquestions.session.NewSessionFragment"
         android:label="fragment_new_session"
         tools:layout="@layout/fragment_new_session" />
+    <dialog
+        android:id="@+id/createUserDialogFragment"
+        android:name="com.matilfa.twentyquestions.session.CreateUserDialogFragment"
+        android:label="CreateUserDialogFragment" >
+        <action
+            android:id="@+id/action_createUserDialogFragment_to_newSessionFragment"
+            app:destination="@id/newSessionFragment" />
+    </dialog>
 
 
 </navigation>

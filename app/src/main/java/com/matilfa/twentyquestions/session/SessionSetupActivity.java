@@ -15,15 +15,11 @@ import com.matilfa.twentyquestions.session.models.SessionViewModel;
 
 public class SessionSetupActivity extends AppCompatActivity {
 
-    private SessionViewModel sessionViewModel;
-
-    public SessionSetupActivity() {
-        super(R.layout.activity_session_setup);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_session_setup);
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment_session);
@@ -36,14 +32,14 @@ public class SessionSetupActivity extends AppCompatActivity {
 
 
 //        sessionViewModel = new ViewModelProvider(this).get(SessionViewModel.class);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.nav_host_fragment_session, TopSessionFragment.class, null, "topFrag")
-//                    .add(R.id.sessionFragmentContainerView, LoadSessionFragment.class, null, "loadSessionFrag")
-                    .setReorderingAllowed(true)
-                    .replace(R.id.nav_host_fragment_session, new TopSessionFragment())
-                    .commit(); //Todo add to backstack?
-        }
+//        if (savedInstanceState == null) {
+//            getSupportFragmentManager().beginTransaction()
+////                    .add(R.id.nav_host_fragment_session, TopSessionFragment.class, null, "topFrag")
+////                    .add(R.id.sessionFragmentContainerView, LoadSessionFragment.class, null, "loadSessionFrag")
+//                    .setReorderingAllowed(true)
+//                    .replace(R.id.nav_host_fragment_session, new TopSessionFragment())
+//                    .commit(); //Todo add to backstack?
+//        }
 
 //        sessionViewModel.getCurrentFragment().observe(this, fragment -> {
 //            getSupportFragmentManager().beginTransaction()
@@ -54,7 +50,7 @@ public class SessionSetupActivity extends AppCompatActivity {
 //        });
 
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_session_setup);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.session_setup), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

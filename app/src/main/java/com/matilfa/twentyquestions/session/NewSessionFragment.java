@@ -18,34 +18,27 @@ import com.matilfa.twentyquestions.R;
 import com.matilfa.twentyquestions.session.models.SessionViewModel;
 
 public class NewSessionFragment extends Fragment {
-    private SessionViewModel viewModel;
-    private CreateUserDialogFragment dialogFragment;
+
+//    private CreateUserDialogFragment dialogFragment;
 
     public NewSessionFragment() {
         super(R.layout.fragment_new_session);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        return inflater.inflate(R.layout.fragment_new_session, container, false);
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelProvider(requireActivity()).get(SessionViewModel.class);
 
-        Button createNewPlayerButton = getActivity().findViewById(R.id.createNewPlayerButton); //Todo try catch?
-
-        createNewPlayerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialogFragment = new CreateUserDialogFragment();
-                dialogFragment.show(getParentFragmentManager(), null);
-            }
-        });
+//        Button createNewPlayerButton = getActivity().findViewById(R.id.createNewPlayerButton); //Todo try catch?
+//
+//        createNewPlayerButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                dialogFragment = new CreateUserDialogFragment();
+////                dialogFragment.show(getParentFragmentManager(), null);
+//            }
+//        });
     }
 
 }
