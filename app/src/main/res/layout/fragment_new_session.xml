@@ -35,18 +35,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputSessionName" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/existingMembersListContainerView"
-        android:name="com.matilfa.twentyquestions.session.NewSessionFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginBottom="256dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelSessionMembers" />
+<!--    <androidx.fragment.app.FragmentContainerView-->
+<!--        android:id="@+id/existingMembersListContainerView"-->
+<!--        android:name="com.matilfa.twentyquestions.session.NewSessionFragment"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="64dp"-->
+<!--        android:layout_marginEnd="64dp"-->
+<!--        android:layout_marginBottom="256dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/labelSessionMembers" />-->
 
     <Button
         android:id="@+id/createNewPlayerButton"
@@ -56,17 +56,17 @@
         android:text="@string/createNewUserButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/existingMembersListContainerView" />
+        app:layout_constraintTop_toBottomOf="@id/labelSessionMembers" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/addedMembersListContainerView"
-        android:name="com.matilfa.twentyquestions.session.NewSessionFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="474dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/createNewPlayerButton" />
+<!--    <androidx.fragment.app.FragmentContainerView-->
+<!--        android:id="@+id/addedMembersListContainerView"-->
+<!--        android:name="com.matilfa.twentyquestions.session.NewSessionFragment"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="474dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/createNewPlayerButton" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
