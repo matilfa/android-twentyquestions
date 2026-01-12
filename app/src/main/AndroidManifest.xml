@@ -12,12 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Twentyquestions" >
         <activity
-            android:name=".session.SessionSetupActivity"
-            android:exported="false" />
-        <activity
-            android:name=".main.MainActivity"
-            android:exported="false" />
-        <activity
             android:name=".main.StartScreenActivity"
             android:exported="true" >
             <intent-filter>

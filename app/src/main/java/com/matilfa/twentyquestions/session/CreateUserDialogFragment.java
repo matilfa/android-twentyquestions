@@ -9,10 +9,11 @@ import android.view.LayoutInflater;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.navigation.FloatingWindow;
 
 import com.matilfa.twentyquestions.R;
 
-public class CreateUserDialogFragment extends DialogFragment {
+public class CreateUserDialogFragment extends DialogFragment implements FloatingWindow {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {

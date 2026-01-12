@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/topSessionFragment2">
+    app:startDestination="@id/startScreenFragment">
 
     <fragment
         android:id="@+id/topSessionFragment2"
@@ -26,7 +26,11 @@
         android:id="@+id/newSessionFragment"
         android:name="com.matilfa.twentyquestions.session.NewSessionFragment"
         android:label="fragment_new_session"
-        tools:layout="@layout/fragment_new_session" />
+        tools:layout="@layout/fragment_new_session" >
+        <action
+            android:id="@+id/action_newSessionFragment_to_createUserDialogFragment"
+            app:destination="@id/createUserDialogFragment" />
+    </fragment>
     <dialog
         android:id="@+id/createUserDialogFragment"
         android:name="com.matilfa.twentyquestions.session.CreateUserDialogFragment"
@@ -35,6 +39,23 @@
             android:id="@+id/action_createUserDialogFragment_to_newSessionFragment"
             app:destination="@id/newSessionFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/mainGameFragment"
+        android:name="com.matilfa.twentyquestions.main.MainGameFragment"
+        android:label="fragment_main_game"
+        tools:layout="@layout/fragment_main_game" />
+    <fragment
+        android:id="@+id/startScreenFragment"
+        android:name="com.matilfa.twentyquestions.main.StartScreenFragment"
+        android:label="fragment_start_screen"
+        tools:layout="@layout/fragment_start_screen" >
+        <action
+            android:id="@+id/action_startScreenFragment_to_mainGameFragment"
+            app:destination="@id/mainGameFragment" />
+        <action
+            android:id="@+id/action_startScreenFragment_to_topSessionFragment2"
+            app:destination="@id/topSessionFragment2" />
+    </fragment>
 
 
 </navigation>
