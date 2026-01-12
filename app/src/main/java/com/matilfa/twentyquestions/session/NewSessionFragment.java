@@ -19,7 +19,6 @@ import com.matilfa.twentyquestions.session.models.SessionViewModel;
 
 public class NewSessionFragment extends Fragment {
 
-//    private CreateUserDialogFragment dialogFragment;
 
     public NewSessionFragment() {
         super(R.layout.fragment_new_session);
@@ -30,15 +29,16 @@ public class NewSessionFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        Button createNewPlayerButton = getActivity().findViewById(R.id.createNewPlayerButton); //Todo try catch?
-//
-//        createNewPlayerButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                dialogFragment = new CreateUserDialogFragment();
-////                dialogFragment.show(getParentFragmentManager(), null);
-//            }
-//        });
+        Button createNewPlayerButton = getActivity().findViewById(R.id.createNewPlayerButton); //Todo try catch?
+
+
+        createNewPlayerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                var dialogFragment = new CreateUserDialogFragment();
+                dialogFragment.show(getParentFragmentManager(), null);
+            }
+        });
     }
 
 }
