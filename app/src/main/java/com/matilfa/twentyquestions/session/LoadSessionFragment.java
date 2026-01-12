@@ -15,7 +15,7 @@ import com.matilfa.twentyquestions.R;
 import com.matilfa.twentyquestions.session.models.SessionViewModel;
 
 
-public class LoadSessionFragment extends Fragment implements SessionFragment {
+public class LoadSessionFragment extends Fragment {
     private SessionViewModel viewModel;
 
     public LoadSessionFragment() {

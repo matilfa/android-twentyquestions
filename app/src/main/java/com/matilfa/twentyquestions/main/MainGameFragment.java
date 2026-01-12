@@ -18,7 +18,9 @@ import com.matilfa.twentyquestions.data.questions.QuestionRepository;
 public class MainGameFragment extends Fragment {
     private QuestionRepository questionRepository;
 
-    public MainGameFragment() {super((R.layout.fragment_main_game));}
+    public MainGameFragment() {
+        super((R.layout.fragment_main_game));
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
