@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class QuestionRepository {
+public class TwentyQuestionsRepository {
     private final Context context;
     private TwentyQuestionsDatabase db;
     private QuestionDao questionDao;
@@ -27,7 +27,7 @@ public class QuestionRepository {
 
     private final TextView questionText;
 
-    public QuestionRepository(Context context, TextView questionText) {
+    public TwentyQuestionsRepository(Context context, TextView questionText) {
         this.context = context;
         this.questionText = questionText;
     }

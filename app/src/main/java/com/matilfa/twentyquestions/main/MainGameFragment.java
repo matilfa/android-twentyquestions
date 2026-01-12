@@ -6,17 +6,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.matilfa.twentyquestions.R;
-import com.matilfa.twentyquestions.data.questions.QuestionRepository;
+import com.matilfa.twentyquestions.data.questions.TwentyQuestionsRepository;
 
 
 public class MainGameFragment extends Fragment {
-    private QuestionRepository questionRepository;
+    private TwentyQuestionsRepository twentyQuestionsRepository;
 
     public MainGameFragment() {
         super((R.layout.fragment_main_game));
@@ -27,16 +25,16 @@ public class MainGameFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        questionRepository = new QuestionRepository(
+        twentyQuestionsRepository = new TwentyQuestionsRepository(
                 getContext(), getActivity().findViewById(R.id.questionText));
-        questionRepository.setup();
+        twentyQuestionsRepository.setup();
 
         Button nextButton = getActivity().findViewById(R.id.nextQuestionButton);
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                questionRepository.generateRandomQuestion();
+                twentyQuestionsRepository.generateRandomQuestion();
             }
         });
 
