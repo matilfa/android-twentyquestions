@@ -9,7 +9,7 @@
         android:id="@+id/topSessionFragment2"
         android:name="com.matilfa.twentyquestions.session.TopSessionFragment"
         android:label="fragment_session_top"
-        tools:layout="@layout/fragment_session_top" >
+        tools:layout="@layout/fragment_session_top">
         <action
             android:id="@+id/action_topSessionFragment2_to_loadSessionFragment"
             app:destination="@id/loadSessionFragment" />
@@ -26,7 +26,7 @@
         android:id="@+id/newSessionFragment"
         android:name="com.matilfa.twentyquestions.session.NewSessionFragment"
         android:label="fragment_new_session"
-        tools:layout="@layout/fragment_new_session" >
+        tools:layout="@layout/fragment_new_session">
         <action
             android:id="@+id/action_newSessionFragment_to_createUserDialogFragment"
             app:destination="@id/createUserDialogFragment" />
@@ -34,7 +34,7 @@
     <dialog
         android:id="@+id/createUserDialogFragment"
         android:name="com.matilfa.twentyquestions.session.CreateUserDialogFragment"
-        android:label="CreateUserDialogFragment" >
+        android:label="CreateUserDialogFragment">
         <action
             android:id="@+id/action_createUserDialogFragment_to_newSessionFragment"
             app:destination="@id/newSessionFragment" />
@@ -43,12 +43,13 @@
         android:id="@+id/mainGameFragment"
         android:name="com.matilfa.twentyquestions.main.MainGameFragment"
         android:label="fragment_main_game"
-        tools:layout="@layout/fragment_main_game" />
+        tools:layout="@layout/fragment_main_game">
+    </fragment>
     <fragment
         android:id="@+id/startScreenFragment"
         android:name="com.matilfa.twentyquestions.main.StartScreenFragment"
         android:label="fragment_start_screen"
-        tools:layout="@layout/fragment_start_screen" >
+        tools:layout="@layout/fragment_start_screen">
         <action
             android:id="@+id/action_startScreenFragment_to_mainGameFragment"
             app:destination="@id/mainGameFragment" />

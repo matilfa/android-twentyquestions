@@ -15,6 +15,9 @@ public interface QuestionDao {
     @Query("SELECT * FROM question WHERE id = :id")
     Question getById(int id);
 
+    @Query("SELECT COUNT(id) FROM question")
+    int getQuestionCount();
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<Question> questions);
 }
