@@ -24,7 +24,7 @@ public class TwentyQuestionsRepository {
     private QuestionDao questionDao;
     private SessionDao sessionDao;
     private UserDao userDao;
-    private final List<Question> questions = new ArrayList<>();
+    private final List<Question> questions = new ArrayList<>(); //todo: make into livedata?
 
 
     public TwentyQuestionsRepository(Context context) {

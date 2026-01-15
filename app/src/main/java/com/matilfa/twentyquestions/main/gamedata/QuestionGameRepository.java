@@ -42,7 +42,7 @@ public class QuestionGameRepository {
                 questionText.post(() ->
                         questionText.setText(context.getResources().getString(
                                 R.string.displayed_question,
-                                question.id,
+                                question.id, //todo fix a field for question number, not use id
                                 question.text)));
             }
         }).start();

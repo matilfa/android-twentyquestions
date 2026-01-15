@@ -18,6 +18,8 @@ public interface QuestionDao {
     @Query("SELECT COUNT(id) FROM question")
     int getQuestionCount();
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     void insertAll(List<Question> questions);
+
+
 }
