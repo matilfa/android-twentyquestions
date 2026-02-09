@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="Pink">#F48ED0</color>
+    <color name="Turquise">#16FF97</color>
+
 </resources>
