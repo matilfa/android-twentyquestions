@@ -7,6 +7,9 @@ import androidx.room.Query;
 
 import java.util.List;
 
+/**
+ * Data access object for data operations on {@code Session} objects.
+ */
 @Dao
 public interface SessionDao {
     @Query("SELECT * FROM session")

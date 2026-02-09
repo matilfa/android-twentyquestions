@@ -10,6 +10,9 @@ import com.matilfa.twentyquestions.data.sessions.Session;
 
 import java.util.List;
 
+/**
+ * Data access object for data operations on {@code User} objects.
+ */
 @Dao
 public interface UserDao {
     @Query("SELECT * FROM user")

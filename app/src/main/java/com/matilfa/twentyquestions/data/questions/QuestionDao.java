@@ -7,6 +7,9 @@ import androidx.room.Query;
 
 import java.util.List;
 
+/**
+ * Data access object for data operations on {@code Question} objects.
+ */
 @Dao
 public interface QuestionDao {
     @Query("SELECT * FROM question")
@@ -15,6 +18,10 @@ public interface QuestionDao {
     @Query("SELECT * FROM question WHERE id = :id")
     Question getById(int id);
 
+    /**
+     * Get the total number of questions in the data source.
+     * @return The total number of questions
+     */
     @Query("SELECT COUNT(id) FROM question")
     int getQuestionCount();
 
