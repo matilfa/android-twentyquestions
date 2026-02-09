@@ -13,7 +13,9 @@ import com.matilfa.twentyquestions.R;
 import com.matilfa.twentyquestions.data.TwentyQuestionsRepository;
 import com.matilfa.twentyquestions.main.gamedata.QuestionGameRepository;
 
-
+/**
+ * Fragment for the main part of the game where you get the random questions.
+ */
 public class MainGameFragment extends Fragment {
     private QuestionGameRepository questionGameRepository;
 

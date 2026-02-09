@@ -16,6 +16,9 @@ import com.matilfa.twentyquestions.data.users.UserDao;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * The applications database class, extending RoomDatabase.
+ */
 @Database(entities = {Question.class, Session.class, User.class}, version = 1, exportSchema = false)
 //todo: fix data migration
 public abstract class TwentyQuestionsDatabase extends RoomDatabase {
