@@ -17,3 +17,5 @@ local.properties
 
 *.db
 app/src/main/assets/
+*.png
+*.webp
