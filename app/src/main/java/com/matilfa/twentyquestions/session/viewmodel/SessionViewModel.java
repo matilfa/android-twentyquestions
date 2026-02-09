@@ -1,5 +1,6 @@
 package com.matilfa.twentyquestions.session.viewmodel;
 
+import android.app.Application;
 import android.content.Context;
 
 import androidx.fragment.app.Fragment;
@@ -16,8 +17,8 @@ public class SessionViewModel extends ViewModel {
     private final LiveData<List<User>> allUsers;
     private UserRepository userRepository;
 
-    public SessionViewModel(Context context) {
-        userRepository = new UserRepository(context);
+    public SessionViewModel(Application application) {
+        userRepository = new UserRepository(application);
         allUsers = userRepository.getAllUsers();
     }
 
