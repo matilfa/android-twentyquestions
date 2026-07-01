@@ -25,4 +25,7 @@
     <string name="createUserDialogPositiveButton">Skapa</string>
     <string name="createUserDialogNegativeButton">Avbryt</string>
 
+    <string name="hello_blank_fragment">Hej blank fragment</string>
+
+
 </resources>
