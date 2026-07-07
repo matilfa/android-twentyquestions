@@ -21,6 +21,7 @@
 
     <string name="newUserDialogTitle">Create new user</string>
     <string name="newNameInputFieldEt">Enter a name</string>
+    <string name="warningText">A player with this name already exists</string>
     <string name="createUserDialogPositiveButton">Create</string>
     <string name="createUserDialogNegativeButton">Cancel</string>
     <!-- TODO: Remove or change this placeholder text -->

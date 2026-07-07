@@ -22,6 +22,7 @@
 
     <string name="newUserDialogTitle">Skapa ny användare</string>
     <string name="newNameInputFieldEt">Skriv in ett namn</string>
+    <string name="warningText">Spelare med detta namn existerar redan</string>
     <string name="createUserDialogPositiveButton">Skapa</string>
     <string name="createUserDialogNegativeButton">Avbryt</string>
 
