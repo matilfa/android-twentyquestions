@@ -17,6 +17,9 @@ import com.matilfa.twentyquestions.session.viewmodel.UserListViewModel;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class NewSessionFragment extends Fragment {
     private UserListViewModel userListViewModel;
 
@@ -69,9 +72,10 @@ public class NewSessionFragment extends Fragment {
             public void run() {
 
                 TextView textView = getActivity().findViewById(R.id.testUserListTv);
+                var newText = textView.getText() + "\n" + user.name;
 
                 textView.post(() ->
-                        textView.setText(textView.getText() + "\n" + user.name));
+                        textView.setText(newText));
             }
         }).start();
     }

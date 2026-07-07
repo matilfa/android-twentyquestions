@@ -34,7 +34,8 @@
     <dialog
         android:id="@+id/createUserDialogFragment"
         android:name="com.matilfa.twentyquestions.session.CreateUserDialogFragment"
-        android:label="CreateUserDialogFragment">
+        android:label="CreateUserDialogFragment"
+        tools:layout="@layout/dialog_createmember">
         <action
             android:id="@+id/action_createUserDialogFragment_to_newSessionFragment"
             app:destination="@id/newSessionFragment" />

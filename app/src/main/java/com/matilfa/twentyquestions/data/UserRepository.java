@@ -10,12 +10,19 @@ import com.matilfa.twentyquestions.data.users.UserDao;
 
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import dagger.hilt.android.qualifiers.ApplicationContext;
+
+@Singleton
 public class UserRepository {
     private final Context context;
     private UserDao userDao;
     private LiveData<List<User>> allUsers;
 
-    public UserRepository(Context context) {
+    @Inject
+    public UserRepository(@ApplicationContext Context context) {
         this.context = context;
         userDao = TwentyQuestionsDatabase.getInstance(context).userDao();
         allUsers = userDao.getAll();

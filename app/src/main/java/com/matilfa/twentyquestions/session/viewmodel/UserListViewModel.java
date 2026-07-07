@@ -10,17 +10,19 @@ import com.matilfa.twentyquestions.data.users.User;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.lifecycle.HiltViewModel;
+
+@HiltViewModel
 public class UserListViewModel extends ViewModel {
     private final LiveData<List<User>> allUsers;
     private UserRepository userRepository;
 
-    public UserListViewModel(Application application) {
-        userRepository = new UserRepository();
+    @Inject
+    public UserListViewModel(UserRepository userRepository) {
+        this.userRepository = userRepository;
         allUsers = userRepository.getAllUsers();
-    }
-
-    public UserListViewModel() {
-        this()
     }
 
     public LiveData<List<User>> getAllUsers() {

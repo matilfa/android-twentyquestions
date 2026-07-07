@@ -11,6 +11,9 @@ import androidx.core.view.WindowInsetsCompat;
 import com.matilfa.twentyquestions.R;
 import com.matilfa.twentyquestions.data.TwentyQuestionsRepository;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class StartScreenActivity extends AppCompatActivity {
 //    private SessionViewModel sessionViewModel;
 
