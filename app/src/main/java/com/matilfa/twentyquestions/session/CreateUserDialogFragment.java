@@ -1,11 +1,14 @@
 package com.matilfa.twentyquestions.session;
 
+import static android.view.View.VISIBLE;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -40,16 +43,19 @@ public class CreateUserDialogFragment extends DialogFragment implements Floating
                 var userRepo = new UserRepository(getActivity().getApplicationContext());
 
                 //if name is in listview of users then,
-//                if (userRepo.getUserByName(name) == null) {
-//                    userRepo.addNewUser(name);
-//                }
-//                else {
-//                    Toast.makeText(getActivity().getApplicationContext(),
-//                            name + " already exist. Try again with a unique name.",
-//                            Toast.LENGTH_LONG).show();
+                if (userRepo.getUserByName(name) == null) {
+                    userRepo.addNewUser(name);
+                }
+                else {
+                    Toast.makeText(getActivity().getApplicationContext(),
+                            name + " already exist. Try again with a unique name.",
+                            Toast.LENGTH_LONG).show();
+
+                    dialog.cancel();
 //
-//                    dialog.cancel();
-//                }
+//                    TextView tv = dia.findViewById(R.id.userExistsWarnTv);
+//                    tv.setVisibility(VISIBLE);
+                }
             }
         });
 

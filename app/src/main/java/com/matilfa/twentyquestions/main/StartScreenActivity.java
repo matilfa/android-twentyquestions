@@ -7,12 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.matilfa.twentyquestions.R;
-import com.matilfa.twentyquestions.data.TwentyQuestionsDatabase;
 import com.matilfa.twentyquestions.data.TwentyQuestionsRepository;
-import com.matilfa.twentyquestions.session.viewmodel.SessionViewModel;
 
 public class StartScreenActivity extends AppCompatActivity {
 //    private SessionViewModel sessionViewModel;

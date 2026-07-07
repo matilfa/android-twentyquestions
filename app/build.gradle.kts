@@ -62,7 +62,7 @@
         implementation("androidx.fragment:fragment:${fragment_version}")
 
         //For navigation
-        val nav_version = "2.9.6"
+        val nav_version = "2.9.8"
 
         implementation("androidx.navigation:navigation-fragment:$nav_version")
         implementation("androidx.navigation:navigation-ui:$nav_version")
@@ -79,4 +79,25 @@
         //Hilt
 //        implementation("com.google.dagger:hilt-android:2.57.1")
 //        ksp("com.google.dagger:hilt-android-compiler:2.57.1")
+
+        // ViewModel
+
+        val lifecycle_version = "2.11.0"
+        val arch_version = "2.2.0"
+
+        // ViewModel
+        implementation("androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version")
+        // LiveData
+        implementation("androidx.lifecycle:lifecycle-livedata:$lifecycle_version")
+        // Saved state module for ViewModel
+        implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:${lifecycle_version}")
+        // Annotation processor
+        annotationProcessor("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")
+
+        // optional - Test helpers for LiveData
+        testImplementation("androidx.arch.core:core-testing:$arch_version")
+
+        // optional - Test helpers for Lifecycle runtime
+        testImplementation("androidx.lifecycle:lifecycle-runtime-testing:$lifecycle_version")
+
     }

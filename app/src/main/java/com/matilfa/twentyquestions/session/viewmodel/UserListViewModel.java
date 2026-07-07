@@ -1,11 +1,8 @@
 package com.matilfa.twentyquestions.session.viewmodel;
 
 import android.app.Application;
-import android.content.Context;
 
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.matilfa.twentyquestions.data.UserRepository;
@@ -13,20 +10,26 @@ import com.matilfa.twentyquestions.data.users.User;
 
 import java.util.List;
 
-public class SessionViewModel extends ViewModel {
+public class UserListViewModel extends ViewModel {
     private final LiveData<List<User>> allUsers;
     private UserRepository userRepository;
 
-    public SessionViewModel(Application application) {
-        userRepository = new UserRepository(application);
+    public UserListViewModel(Application application) {
+        userRepository = new UserRepository();
         allUsers = userRepository.getAllUsers();
+    }
+
+    public UserListViewModel() {
+        this()
     }
 
     public LiveData<List<User>> getAllUsers() {
         return allUsers;
     }
 
-    public void insertUser(User user) {
+    public void addNewUser(String name) {
+        var user = new User();
+        user.name = name;
         userRepository.addNewUser2(user);
     }
 }

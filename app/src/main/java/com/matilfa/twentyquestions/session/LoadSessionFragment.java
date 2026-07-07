@@ -9,11 +9,11 @@ import androidx.fragment.app.Fragment;
 import android.view.View;
 
 import com.matilfa.twentyquestions.R;
-import com.matilfa.twentyquestions.session.viewmodel.SessionViewModel;
+import com.matilfa.twentyquestions.session.viewmodel.UserListViewModel;
 
 
 public class LoadSessionFragment extends Fragment {
-    private SessionViewModel viewModel;
+    private UserListViewModel viewModel;
 
     public LoadSessionFragment() {
         super(R.layout.fragment_load_session);

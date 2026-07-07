@@ -53,8 +53,8 @@ public class UserRepository {
         );
     }
 
-//    public User getUserByName(String name) {
-//
+    public User getUserByName(String name) {
+        return null;
 //        Thread thread = new Thread(new Runnable() {
 //            @Override
 //            public void run() {
@@ -62,5 +62,6 @@ public class UserRepository {
 ////            user = userDao.getByName(name);
 //            }
 //        })
-//    }
+
+    }
 }
