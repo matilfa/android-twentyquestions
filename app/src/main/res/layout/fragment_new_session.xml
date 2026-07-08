@@ -63,14 +63,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/userlist_recyclerview"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        tools:listitem="@layout/userlist_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:padding="@dimen/cardview_default_radius"
         app:layout_constraintBottom_toTopOf="@+id/createNewPlayerButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelSessionMembers" />
+        app:layout_constraintTop_toBottomOf="@+id/labelSessionMembers"
+        tools:listitem="@layout/userlist_item" />
 
     <TextView
         android:id="@+id/testUserListTv"
