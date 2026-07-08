@@ -20,6 +20,7 @@
         android:inputType="text"
         android:minHeight="48dp"
         android:text="@string/inputSessionNameText"
+        android:autofillHints="name"
         app:layout_constraintBottom_toTopOf="@+id/labelSessionMembers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,9 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="80dp"
         android:text="@string/createNewUserButton"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.452"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,25 +63,51 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/userlist_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/cardview_default_radius"
+        android:layout_height="300dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="#5CA28AA2"
+        android:backgroundTint="@color/material_dynamic_tertiary80"
+        android:fadeScrollbars="false"
+        android:padding="8dp"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/createNewPlayerButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/labelSessionMembers"
         tools:listitem="@layout/userlist_item" />
 
-    <TextView
-        android:id="@+id/testUserListTv"
+    <Button
+        android:id="@+id/startNewSessionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
-        android:layout_marginBottom="174dp"
-        android:text="hej"
-        app:layout_constraintBottom_toTopOf="@+id/createNewPlayerButton"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/startNewSessionButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/labelSelectedMembers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/labelSelectedMembers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelSessionMembers" /> />
+        app:layout_constraintTop_toBottomOf="@+id/createNewPlayerButton" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/selectedUsersList"
+        android:layout_height="180dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/startNewSessionButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelSelectedMembers" />
+
 
     <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
     <!--        android:layout_width="wrap_content"-->

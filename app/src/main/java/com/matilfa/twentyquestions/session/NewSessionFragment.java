@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import com.matilfa.twentyquestions.R;
 import com.matilfa.twentyquestions.data.users.User;
 import com.matilfa.twentyquestions.session.viewmodel.UserListViewModel;
+import com.matilfa.twentyquestions.session.views.UserListAdapter;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -22,6 +25,8 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class NewSessionFragment extends Fragment {
     private UserListViewModel userListViewModel;
+
+    private UserListAdapter adapter;
 
     public NewSessionFragment() {
         super(R.layout.fragment_new_session);
@@ -43,12 +48,16 @@ public class NewSessionFragment extends Fragment {
 //        );
 
 //        userListViewModel = new ViewModelProvider(this, ViewModelProvider.Factory)
+        adapter = new UserListAdapter();
+
+        RecyclerView recyclerView = getActivity().findViewById(R.id.userlist_recyclerview);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         userListViewModel = new ViewModelProvider(this).get(UserListViewModel.class);
         userListViewModel.getAllUsers().observe(getViewLifecycleOwner(), allUsers -> {
-
-            for (User user : allUsers) {
-                displayUser(user);
+            if (allUsers != null) {
+                adapter.setAllUsers(allUsers);
             }
         });
 
@@ -66,18 +75,6 @@ public class NewSessionFragment extends Fragment {
         });
     }
 
-    private void displayUser(User user) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
 
-                TextView textView = getActivity().findViewById(R.id.testUserListTv);
-                var newText = textView.getText() + "\n" + user.name;
-
-                textView.post(() ->
-                        textView.setText(newText));
-            }
-        }).start();
-    }
 
 }

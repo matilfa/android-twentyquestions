@@ -25,8 +25,9 @@
     <string name="warningText">Spelare med detta namn existerar redan</string>
     <string name="createUserDialogPositiveButton">Skapa</string>
     <string name="createUserDialogNegativeButton">Avbryt</string>
+    <string name="startNewSessionButton">Starta sessionen</string>
+    <string name="labelSelectedMembers">Valda till sessionen</string>
 
-    <string name="hello_blank_fragment">Hej blank fragment</string>
 
 
 </resources>
