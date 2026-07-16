@@ -1,4 +1,4 @@
-package com.matilfa.twentyquestions.session.views;
+package com.matilfa.twentyquestions.session.recyclerview;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +14,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserListAdapter extends RecyclerView.Adapter<UserItemViewHolder> {
-    private List<User> allUsers = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
+    private OnUserButtonClickListener clickListener;
+    private boolean hasAddButton = false;
 
-    public UserListAdapter() {
+    public UserListAdapter(OnUserButtonClickListener clickListener) {
+        this.clickListener = clickListener;
     }
 
-    public void setAllUsers(List<User> allUsers) {
-        this.allUsers = allUsers;
+    public void setUsers(List<User> users) {
+        this.users = users;
         notifyDataSetChanged(); //Todo: More specific change event
     }
 
@@ -30,17 +33,27 @@ public class UserListAdapter extends RecyclerView.Adapter<UserItemViewHolder> {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.userlist_item, parent, false);
 
-        return new UserItemViewHolder(view);
+        return new UserItemViewHolder(view, clickListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull UserItemViewHolder holder, int position) {
-        holder.getUserNameTextView().setText(allUsers.get(position).name);
+        holder.getUserNameTextView().setText(users.get(position).name);
+        holder.setCurrentUser(users.get(position));
+        if (!hasAddButton) {
+            holder.getButton().setImageResource(R.drawable.outline_delete_24);
+        } else {
+            holder.getButton().setImageResource(R.drawable.outline_add_24);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return allUsers.size();
+        return users.size();
+    }
+
+    public void setHasAddButton(boolean hasAddButton) {
+        this.hasAddButton = hasAddButton;
     }
 
 

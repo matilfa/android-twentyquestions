@@ -11,14 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.matilfa.twentyquestions.R;
-import com.matilfa.twentyquestions.data.users.User;
 import com.matilfa.twentyquestions.session.viewmodel.UserListViewModel;
-import com.matilfa.twentyquestions.session.views.UserListAdapter;
-
-import java.util.concurrent.ThreadLocalRandom;
+import com.matilfa.twentyquestions.session.recyclerview.UserListAdapter;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -26,7 +23,8 @@ import dagger.hilt.android.AndroidEntryPoint;
 public class NewSessionFragment extends Fragment {
     private UserListViewModel userListViewModel;
 
-    private UserListAdapter adapter;
+    private UserListAdapter userListAdapter;
+    private UserListAdapter selectedUserListAdapter;
 
     public NewSessionFragment() {
         super(R.layout.fragment_new_session);
@@ -48,16 +46,38 @@ public class NewSessionFragment extends Fragment {
 //        );
 
 //        userListViewModel = new ViewModelProvider(this, ViewModelProvider.Factory)
-        adapter = new UserListAdapter();
-
-        RecyclerView recyclerView = getActivity().findViewById(R.id.userlist_recyclerview);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         userListViewModel = new ViewModelProvider(this).get(UserListViewModel.class);
+
+        //todo: Fix bad code below, (temporary solution)
+        userListAdapter = new UserListAdapter(user -> {
+            userListViewModel.addSelectedUser(user);
+            Toast.makeText(getContext(), "User " + user.name + " was added!", Toast.LENGTH_SHORT).show();
+        });
+        selectedUserListAdapter = new UserListAdapter(user -> {
+            Toast.makeText(getContext(), "User " + user.name + " was removed!! :(", Toast.LENGTH_SHORT).show();
+        });
+
+        RecyclerView userListRecyclerView = getActivity().findViewById(R.id.userlist_recyclerview);
+        userListRecyclerView.setAdapter(userListAdapter);
+        userListAdapter.setHasAddButton(true);
+        userListRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        RecyclerView selectedUserListRecyclerView = getActivity().findViewById(R.id.selected_users_list_recyclerview);
+        selectedUserListRecyclerView.setAdapter(selectedUserListAdapter);
+        selectedUserListAdapter.setHasAddButton(false);
+        selectedUserListRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
         userListViewModel.getAllUsers().observe(getViewLifecycleOwner(), allUsers -> {
             if (allUsers != null) {
-                adapter.setAllUsers(allUsers);
+                userListAdapter.setUsers(allUsers);
+            }
+        });
+
+        userListViewModel.getSelectedUsers().observe(getViewLifecycleOwner(), selectedUsers -> {
+            if (selectedUsers != null) {
+                selectedUserListAdapter.setUsers(selectedUsers);
             }
         });
 

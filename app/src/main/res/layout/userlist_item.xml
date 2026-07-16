@@ -39,5 +39,5 @@
         app:layout_constraintBottom_toBottomOf="@id/personIcon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/personIcon"
-        app:srcCompat="@android:drawable/ic_input_add" />
+         />
 </androidx.constraintlayout.widget.ConstraintLayout>

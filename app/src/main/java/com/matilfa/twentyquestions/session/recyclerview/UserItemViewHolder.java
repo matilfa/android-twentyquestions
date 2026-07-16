@@ -1,4 +1,4 @@
-package com.matilfa.twentyquestions.session.views;
+package com.matilfa.twentyquestions.session.recyclerview;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -9,17 +9,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.matilfa.twentyquestions.R;
+import com.matilfa.twentyquestions.data.users.User;
 
 public class UserItemViewHolder extends RecyclerView.ViewHolder {
     private final TextView userNameTextView;
+    private User currentUser;
     private final ImageView personIcon;
-    private final FloatingActionButton addButton;
+    private final FloatingActionButton button;
 
-    public UserItemViewHolder(@NonNull View itemView) {
+    public UserItemViewHolder(@NonNull View itemView, OnUserButtonClickListener clickListener) {
         super(itemView);
         userNameTextView = itemView.findViewById(R.id.username_tv);
         personIcon = itemView.findViewById(R.id.personIcon);
-        addButton = itemView.findViewById(R.id.addUserToSessionButton);
+        button = itemView.findViewById(R.id.addUserToSessionButton);
+
+        button.setOnClickListener(v -> {
+            clickListener.onUserButtonClick(currentUser);
+        });
     }
 
     public TextView getUserNameTextView() {
@@ -30,8 +36,16 @@ public class UserItemViewHolder extends RecyclerView.ViewHolder {
         return personIcon;
     }
 
-    public FloatingActionButton getAddButton() {
-        return addButton;
+    public FloatingActionButton getButton() {
+        return button;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
     }
 
     //
