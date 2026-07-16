@@ -52,9 +52,9 @@ public class NewSessionFragment extends Fragment {
         //todo: Fix bad code below, (temporary solution)
         userListAdapter = new UserListAdapter(user -> {
             userListViewModel.addSelectedUser(user);
-            Toast.makeText(getContext(), "User " + user.name + " was added!", Toast.LENGTH_SHORT).show();
         });
         selectedUserListAdapter = new UserListAdapter(user -> {
+            userListViewModel.removeSelectedUser(user);
             Toast.makeText(getContext(), "User " + user.name + " was removed!! :(", Toast.LENGTH_SHORT).show();
         });
 

@@ -39,6 +39,7 @@ public class UserListViewModel extends ViewModel {
 
     /**
      * Saves a new user to the database. Creates a {@code User} object using the name parameter.
+     *
      * @param name
      */
     public void addNewUser(String name) {
@@ -49,16 +50,28 @@ public class UserListViewModel extends ViewModel {
 
     /**
      * Adds the User parameter value to the list of selected users for the new session.
+     *
      * @param user
      */
     public void addSelectedUser(User user) {
         if (selectedUsers.isInitialized()) {
-            List<User> updatedSelectedUsers = new ArrayList<>(selectedUsers.getValue());
-            updatedSelectedUsers.add(user);
-            selectedUsers.setValue(updatedSelectedUsers);
-        }
-        else {
+            if (!selectedUsers.getValue().contains(user)) {
+                List<User> updatedSelectedUsers = new ArrayList<>(selectedUsers.getValue());
+                updatedSelectedUsers.add(user);
+                selectedUsers.setValue(updatedSelectedUsers);
+            }
+        } else {
             selectedUsers.setValue(new ArrayList<>(List.of(user)));
         }
+    }
+
+    /**
+     * Removes a user from the list of selected users for the new session.
+     * @param user
+     */
+    public void removeSelectedUser(User user) {
+        List<User> updatedSelectedUsers = new ArrayList<>(selectedUsers.getValue());
+        updatedSelectedUsers.remove(user);
+        selectedUsers.setValue(updatedSelectedUsers);
     }
 }
