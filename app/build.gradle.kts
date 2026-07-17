@@ -105,4 +105,7 @@ dependencies {
     // optional - Test helpers for Lifecycle runtime
     testImplementation("androidx.lifecycle:lifecycle-runtime-testing:$lifecycle_version")
 
+    //Mockito
+    testImplementation("org.mockito:mockito-core:5.23.0")
+
 }
