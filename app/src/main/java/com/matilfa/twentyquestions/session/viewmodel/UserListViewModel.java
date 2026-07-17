@@ -1,12 +1,14 @@
 package com.matilfa.twentyquestions.session.viewmodel;
 
-import android.app.Application;
-
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.matilfa.twentyquestions.data.UserRepository;
+import com.matilfa.twentyquestions.data.sessions.Session;
+import com.matilfa.twentyquestions.data.sessions.SessionRepository;
+import com.matilfa.twentyquestions.data.sessions.UserSessionCrossRef;
+import com.matilfa.twentyquestions.data.users.UserRepository;
 import com.matilfa.twentyquestions.data.users.User;
 
 import java.util.ArrayList;
@@ -21,10 +23,13 @@ public class UserListViewModel extends ViewModel {
     private final LiveData<List<User>> allUsers;
     private final MutableLiveData<List<User>> selectedUsers;
     private UserRepository userRepository;
+    private SessionRepository sessionRepository;
+    private Session createdSession;
 
     @Inject
-    public UserListViewModel(UserRepository userRepository) {
+    public UserListViewModel(@NonNull UserRepository userRepository, @NonNull SessionRepository sessionRepository) {
         this.userRepository = userRepository;
+        this.sessionRepository = sessionRepository;
         allUsers = userRepository.getAllUsers();
         this.selectedUsers = new MutableLiveData<List<User>>();
     }
@@ -73,5 +78,28 @@ public class UserListViewModel extends ViewModel {
         List<User> updatedSelectedUsers = new ArrayList<>(selectedUsers.getValue());
         updatedSelectedUsers.remove(user);
         selectedUsers.setValue(updatedSelectedUsers);
+    }
+
+    /**
+     * Saves the new session in the database.
+     * @param sessionName
+     * @return
+     */
+    public boolean saveNewSession(String sessionName) {
+        if (!selectedUsers.isInitialized() || selectedUsers.getValue().isEmpty()) {
+            throw new RuntimeException("There must be at least one user in a session.");
+        }
+
+        if (sessionName == null ||sessionName.isBlank()) {
+            throw new RuntimeException("Invalid name for session.");
+        }
+
+        if (sessionRepository.getSessionByName(sessionName) != null) {
+            throw new RuntimeException("A session with that name already exists.");
+        }
+
+        createdSession = sessionRepository.createSession(sessionName, selectedUsers.getValue());
+
+        return (createdSession != null && createdSession.sessionId != null);
     }
 }
