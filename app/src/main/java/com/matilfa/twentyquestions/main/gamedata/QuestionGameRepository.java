@@ -7,12 +7,8 @@ import androidx.annotation.NonNull;
 
 import com.matilfa.twentyquestions.R;
 import com.matilfa.twentyquestions.data.TwentyQuestionsDatabase;
-import com.matilfa.twentyquestions.data.TwentyQuestionsRepository;
-import com.matilfa.twentyquestions.data.questions.Question;
 import com.matilfa.twentyquestions.data.questions.QuestionDao;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class QuestionGameRepository {
@@ -42,7 +38,7 @@ public class QuestionGameRepository {
                 questionText.post(() ->
                         questionText.setText(context.getResources().getString(
                                 R.string.displayed_question,
-                                question.id, //todo fix a field for question number, not use id
+                                question.questionId, //todo fix a field for question number, not use id
                                 question.text)));
             }
         }).start();

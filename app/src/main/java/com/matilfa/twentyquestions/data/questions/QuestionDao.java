@@ -15,14 +15,14 @@ public interface QuestionDao {
     @Query("SELECT * FROM question")
     List<Question> getAll();
 
-    @Query("SELECT * FROM question WHERE id = :id")
+    @Query("SELECT * FROM question WHERE questionId = :id")
     Question getById(int id);
 
     /**
      * Get the total number of questions in the data source.
      * @return The total number of questions
      */
-    @Query("SELECT COUNT(id) FROM question")
+    @Query("SELECT COUNT(questionId) FROM question")
     int getQuestionCount();
 
     @Insert(onConflict = OnConflictStrategy.ABORT)

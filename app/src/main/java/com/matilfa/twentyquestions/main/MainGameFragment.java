@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.matilfa.twentyquestions.R;
-import com.matilfa.twentyquestions.data.TwentyQuestionsRepository;
 import com.matilfa.twentyquestions.main.gamedata.QuestionGameRepository;
 
 /**

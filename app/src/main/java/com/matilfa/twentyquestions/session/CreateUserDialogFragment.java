@@ -1,14 +1,11 @@
 package com.matilfa.twentyquestions.session;
 
-import static android.view.View.VISIBLE;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,7 +14,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.navigation.FloatingWindow;
 
 import com.matilfa.twentyquestions.R;
-import com.matilfa.twentyquestions.data.UserRepository;
+import com.matilfa.twentyquestions.data.users.UserRepository;
 
 public class CreateUserDialogFragment extends DialogFragment implements FloatingWindow {
     @NonNull

@@ -18,7 +18,7 @@ public interface UserDao {
     @Query("SELECT * FROM user")
     LiveData<List<User>> getAll();
 
-    @Query("SELECT * FROM user WHERE id = :id")
+    @Query("SELECT * FROM user WHERE userId = :id")
     User getById(int id);
 
     @Query("SELECT * FROM user WHERE name LIKE :name")

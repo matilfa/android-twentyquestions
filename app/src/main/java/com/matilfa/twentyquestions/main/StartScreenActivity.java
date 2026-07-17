@@ -9,7 +9,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.matilfa.twentyquestions.R;
-import com.matilfa.twentyquestions.data.TwentyQuestionsRepository;
+import com.matilfa.twentyquestions.data.questions.TwentyQuestionsRepository;
 
 import dagger.hilt.android.AndroidEntryPoint;
 

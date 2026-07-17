@@ -1,12 +1,9 @@
-package com.matilfa.twentyquestions.data;
+package com.matilfa.twentyquestions.data.questions;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.widget.TextView;
 
-import com.matilfa.twentyquestions.R;
-import com.matilfa.twentyquestions.data.questions.Question;
-import com.matilfa.twentyquestions.data.questions.QuestionDao;
+import com.matilfa.twentyquestions.data.TwentyQuestionsDatabase;
 import com.matilfa.twentyquestions.data.sessions.SessionDao;
 import com.matilfa.twentyquestions.data.users.UserDao;
 
@@ -17,8 +14,13 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import dagger.hilt.android.qualifiers.ApplicationContext;
+
+@Singleton
 public class TwentyQuestionsRepository {
     private final Context context;
     private QuestionDao questionDao;
@@ -27,7 +29,8 @@ public class TwentyQuestionsRepository {
     private final List<Question> questions = new ArrayList<>(); //todo: make into livedata?
 
 
-    public TwentyQuestionsRepository(Context context) {
+    @Inject
+    public TwentyQuestionsRepository(@ApplicationContext Context context) {
         this.context = context;
     }
 
