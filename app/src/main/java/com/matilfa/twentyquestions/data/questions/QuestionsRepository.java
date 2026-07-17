@@ -3,6 +3,8 @@ package com.matilfa.twentyquestions.data.questions;
 import android.content.Context;
 import android.content.res.AssetManager;
 
+import androidx.lifecycle.LiveData;
+
 import com.matilfa.twentyquestions.data.TwentyQuestionsDatabase;
 import com.matilfa.twentyquestions.data.sessions.SessionDao;
 import com.matilfa.twentyquestions.data.users.UserDao;
@@ -21,16 +23,16 @@ import javax.inject.Singleton;
 import dagger.hilt.android.qualifiers.ApplicationContext;
 
 @Singleton
-public class TwentyQuestionsRepository {
+public class QuestionsRepository {
     private final Context context;
     private QuestionDao questionDao;
     private SessionDao sessionDao;
     private UserDao userDao;
-    private final List<Question> questions = new ArrayList<>(); //todo: make into livedata?
+    private LiveData<List<Question>> questions;
 
 
     @Inject
-    public TwentyQuestionsRepository(@ApplicationContext Context context) {
+    public QuestionsRepository(@ApplicationContext Context context) {
         this.context = context;
     }
 
@@ -46,9 +48,9 @@ public class TwentyQuestionsRepository {
                     sessionDao = db.sessionDao();
                     userDao = db.userDao();
 
-                    if (questionDao.getAll().isEmpty()) {
+                    if (questionDao.getAll().getValue().isEmpty()) {
                         populateQuestionsList();
-                        questionDao.insertAll(questions);
+                        questionDao.insertAll(questions.getValue());
                     }
                 }
             });
@@ -67,7 +69,7 @@ public class TwentyQuestionsRepository {
                     var question = new Question();
 
                     question.text = line;
-                    questions.add(question);
+                    questions.getValue().add(question);
 
                     line = br.readLine();
 
@@ -78,12 +80,12 @@ public class TwentyQuestionsRepository {
         }
     }
 
-    public QuestionDao getQuestionRepoDao(){
+    public QuestionDao getQuestionRepoDao() {
         return questionDao;
     }
 
-    public List<Question> getQuestions() {
-        return Collections.unmodifiableList(questions);
+    public LiveData<List<Question>> getQuestions() {
+        return questions;
     }
 
 }

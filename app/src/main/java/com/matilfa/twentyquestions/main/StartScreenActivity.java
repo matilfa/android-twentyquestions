@@ -9,7 +9,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.matilfa.twentyquestions.R;
-import com.matilfa.twentyquestions.data.questions.TwentyQuestionsRepository;
+import com.matilfa.twentyquestions.data.questions.QuestionsRepository;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -23,7 +23,7 @@ public class StartScreenActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_start_screen);
 
-        var twentyQuestionsRepository = new TwentyQuestionsRepository(this);
+        var twentyQuestionsRepository = new QuestionsRepository(this);
         twentyQuestionsRepository.initDatabase();
 
 //        sessionViewModel = new ViewModelProvider(this).get(SessionViewModel.class);

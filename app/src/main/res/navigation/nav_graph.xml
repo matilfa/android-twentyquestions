@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_newSessionFragment_to_createUserDialogFragment"
             app:destination="@id/createUserDialogFragment" />
+        <action
+            android:id="@+id/action_newSessionFragment_to_mainGameFragment"
+            app:destination="@id/mainGameFragment" />
     </fragment>
     <dialog
         android:id="@+id/createUserDialogFragment"
@@ -45,6 +48,9 @@
         android:name="com.matilfa.twentyquestions.main.MainGameFragment"
         android:label="fragment_main_game"
         tools:layout="@layout/fragment_main_game">
+        <argument
+            android:name="sessionId"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/startScreenFragment"
