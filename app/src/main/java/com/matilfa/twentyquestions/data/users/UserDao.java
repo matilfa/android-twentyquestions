@@ -25,8 +25,8 @@ public interface UserDao {
     User getByName(String name);
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    void insertUser(User user);
+    Long insertUser(User user);
 
     @Query("DELETE FROM user WHERE name = :name")
-    void deleteUser(String name);
+    int deleteUser(String name);
 }

@@ -4,6 +4,6 @@ import androidx.room.Entity;
 
 @Entity(primaryKeys = {"userId", "sessionId"})
 public class UserSessionCrossRef {
-    public int userId;
-    public int sessionId;
+    public Long userId;
+    public Long sessionId;
 }

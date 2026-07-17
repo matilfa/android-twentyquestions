@@ -23,7 +23,10 @@ public interface SessionDao {
     Session getByName(String name);
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    void insertSession(Session session);
+    Long insertSession(Session session);
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    void insertAllUserCrossRefs(List<UserSessionCrossRef> crossRefs);
 
     @Transaction
     @Query("SELECT * FROM session")

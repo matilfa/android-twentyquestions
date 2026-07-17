@@ -11,7 +11,7 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Session {
     @PrimaryKey(autoGenerate = true)
-    public int sessionId;
+    public Long sessionId;
 
     @ColumnInfo(name = "name")
     public String name;
