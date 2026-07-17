@@ -1,12 +1,11 @@
-package com.matilfa.twentyquestions.data;
+package com.matilfa.twentyquestions.data.users;
 
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
-import com.matilfa.twentyquestions.data.users.User;
-import com.matilfa.twentyquestions.data.users.UserDao;
+import com.matilfa.twentyquestions.data.TwentyQuestionsDatabase;
 
 import java.util.List;
 

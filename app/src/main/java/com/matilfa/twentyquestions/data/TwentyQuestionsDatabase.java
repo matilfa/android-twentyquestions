@@ -10,6 +10,7 @@ import com.matilfa.twentyquestions.data.questions.Question;
 import com.matilfa.twentyquestions.data.questions.QuestionDao;
 import com.matilfa.twentyquestions.data.sessions.Session;
 import com.matilfa.twentyquestions.data.sessions.SessionDao;
+import com.matilfa.twentyquestions.data.sessions.UserSessionCrossRef;
 import com.matilfa.twentyquestions.data.users.User;
 import com.matilfa.twentyquestions.data.users.UserDao;
 
@@ -19,14 +20,20 @@ import java.util.concurrent.Executors;
 /**
  * The applications database class, extending RoomDatabase.
  */
-@Database(entities = {Question.class, Session.class, User.class}, version = 1, exportSchema = false)
+@Database(entities = {
+        Question.class,
+        Session.class,
+        User.class,
+        UserSessionCrossRef.class
+},
+        version = 1, exportSchema = false)
 //todo: fix data migration
 public abstract class TwentyQuestionsDatabase extends RoomDatabase {
 
     private static volatile TwentyQuestionsDatabase dbInstance;
     public static final String DATABASE_NAME = "twentyQuestions.db";
     private static final int NUMBER_OF_THREADS = 4;
-    static final ExecutorService databaseWriteExecutor =
+    public static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
     public abstract QuestionDao questionDao();
