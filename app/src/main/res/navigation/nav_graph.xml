@@ -31,7 +31,7 @@
             android:id="@+id/action_newSessionFragment_to_createUserDialogFragment"
             app:destination="@id/createUserDialogFragment" />
         <action
-            android:id="@+id/action_newSessionFragment_to_mainGameFragment"
+            android:id="@+id/action_startNewSession"
             app:destination="@id/mainGameFragment" />
     </fragment>
     <dialog
