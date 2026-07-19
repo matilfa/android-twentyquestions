@@ -11,6 +11,8 @@ import androidx.room.PrimaryKey;
 public class Question {
     @PrimaryKey(autoGenerate = true)
     public Long questionId;
+    @ColumnInfo(name = "questionNumber")
+    public int questionNumber;
 
     @ColumnInfo(name = "text")
     public String text;
