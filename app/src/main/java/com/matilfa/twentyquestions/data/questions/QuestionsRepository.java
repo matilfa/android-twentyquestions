@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.AssetManager;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.matilfa.twentyquestions.data.TwentyQuestionsDatabase;
 import com.matilfa.twentyquestions.data.sessions.SessionDao;
@@ -14,7 +15,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -28,39 +28,62 @@ public class QuestionsRepository {
     private QuestionDao questionDao;
     private SessionDao sessionDao;
     private UserDao userDao;
-    private LiveData<List<Question>> questions;
+    private MutableLiveData<List<Question>> questions;
 
 
     @Inject
-    public QuestionsRepository(@ApplicationContext Context context) {
+    public QuestionsRepository(@ApplicationContext Context context, QuestionDao questionDao, SessionDao sessionDao, UserDao userDao) {
         this.context = context;
+        this.questionDao = questionDao;
+        this.sessionDao = sessionDao;
+        this.userDao = userDao;
     }
 
-    public void initDatabase() {
-        if (questionDao == null) {
-            Thread thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
+    public void initDatabase(){
+        TwentyQuestionsDatabase.databaseWriteExecutor.execute(() -> {
+            if (questionDao == null) {
+                System.out.println("null!!");
+            }
+            if (questionDao.getQuestionCount() == 0) {
+                List<Question> questionsToAdd = extractQuestionsFromFile();
+                questionDao.insertAll(questionsToAdd);
 
-                    var db = TwentyQuestionsDatabase.getInstance(context.getApplicationContext());
-
-                    questionDao = db.questionDao();
-                    sessionDao = db.sessionDao();
-                    userDao = db.userDao();
-
-                    if (questionDao.getAll().getValue().isEmpty()) {
-                        populateQuestionsList();
-                        questionDao.insertAll(questions.getValue());
-                    }
-                }
-            });
-
-            thread.start();
-        }
+                questions.postValue(questionsToAdd);
+            }
+            else {
+                questions.postValue(questionDao.getAll());
+            }
+        });
     }
 
-    private void populateQuestionsList() {
+//    public void initDb() {
+//        if (questionDao == null) {
+//            Thread thread = new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//
+//                    var db = TwentyQuestionsDatabase.getInstance(context.getApplicationContext());
+//
+//                    questionDao = db.questionDao();
+//                    sessionDao = db.sessionDao();
+//                    userDao = db.userDao();
+//
+//                    if (!questionDao.getAll().isInitialized() || questionDao.getAll().getValue().isEmpty()) {
+//                        questions = new MutableLiveData<List<Question>>();
+//                        extractQuestionsFromFile();
+//                        questionDao.insertAll(questions.getValue());
+//                    }
+//                }
+//            });
+//
+//            thread.start();
+//        }
+//    }
+
+    private List<Question> extractQuestionsFromFile() {
         AssetManager am = context.getAssets();
+        List<Question> questionsToAdd = new ArrayList<>();
+        int questionCount = 1;
         try {
             try (InputStream is = am.open("questions-data.txt");//Todo fix hard-coded filename
                  BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
@@ -69,15 +92,17 @@ public class QuestionsRepository {
                     var question = new Question();
 
                     question.text = line;
-                    questions.getValue().add(question);
+                    question.questionNumber = questionCount;
+                    questionsToAdd.add(question);
 
                     line = br.readLine();
-
+                    questionCount++;
                 }
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        return questionsToAdd;
     }
 
     public QuestionDao getQuestionRepoDao() {
@@ -85,6 +110,9 @@ public class QuestionsRepository {
     }
 
     public LiveData<List<Question>> getQuestions() {
+        if (questions.getValue() == null || questions.getValue().isEmpty()) {
+            initDatabase();
+        }
         return questions;
     }
 
