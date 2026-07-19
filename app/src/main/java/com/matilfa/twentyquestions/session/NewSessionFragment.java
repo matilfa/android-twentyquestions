@@ -6,11 +6,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.matilfa.twentyquestions.R;
@@ -82,8 +85,6 @@ public class NewSessionFragment extends Fragment {
         });
 
         Button createNewPlayerButton = getActivity().findViewById(R.id.createNewPlayerButton); //Todo try catch?
-
-
         createNewPlayerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,8 +94,30 @@ public class NewSessionFragment extends Fragment {
 //                Navigation.findNavController(view).navigate(R.id.action_newSessionFragment_to_createUserDialogFragment);
             }
         });
-    }
 
+        Button startButton = getActivity().findViewById((R.id.startNewSessionButton));
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText editText = getActivity().findViewById(R.id.inputSessionName);
+                String sessionName = editText.getText().toString();
+                boolean success = userListViewModel.saveNewSession(sessionName);
+
+                if (success) {
+                    long sessionId = userListViewModel.getCreatedSession().sessionId;
+                    var action = NewSessionFragmentDirections.actionStartNewSession(sessionId);
+
+                    NavController navController = Navigation.findNavController(view);
+                    navController.navigate(action);
+                }
+                else {
+                    Toast.makeText(getActivity(), "Something went wrong.", Toast.LENGTH_SHORT).show(); //todo: fix proper error handling
+                }
+
+            }
+        });
+
+    }
 
 
 }
