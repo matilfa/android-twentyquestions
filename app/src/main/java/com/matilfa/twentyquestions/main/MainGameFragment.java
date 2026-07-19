@@ -14,9 +14,12 @@ import com.matilfa.twentyquestions.R;
 import com.matilfa.twentyquestions.data.questions.Question;
 import com.matilfa.twentyquestions.main.gamedata.MainGameViewModel;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
 /**
  * Fragment for the main part of the game where you get the random questions.
  */
+@AndroidEntryPoint
 public class MainGameFragment extends Fragment {
     private MainGameViewModel viewModel;
 
@@ -31,6 +34,10 @@ public class MainGameFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(MainGameViewModel.class);
 //        var questionGameRepository = new QuestionGameRepository(getActivity().getApplicationContext(),
 //                getActivity().findViewById(R.id.questionText));
+        Long sessionId = getArguments().getLong("sessionId");
+        if (sessionId > 0) {
+            viewModel.setActiveSession(sessionId);
+        }
 
         Button nextButton = getActivity().findViewById(R.id.nextQuestionButton);
 

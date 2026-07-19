@@ -21,7 +21,11 @@
         android:id="@+id/loadSessionFragment"
         android:name="com.matilfa.twentyquestions.session.LoadSessionFragment"
         android:label="fragment_load_session"
-        tools:layout="@layout/fragment_load_session" />
+        tools:layout="@layout/fragment_load_session" >
+        <action
+            android:id="@+id/action_loadSessionFragment_to_mainGameFragment"
+            app:destination="@id/mainGameFragment" />
+    </fragment>
     <fragment
         android:id="@+id/newSessionFragment"
         android:name="com.matilfa.twentyquestions.session.NewSessionFragment"
