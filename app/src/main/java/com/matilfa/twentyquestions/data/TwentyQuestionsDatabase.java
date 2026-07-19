@@ -8,6 +8,7 @@ import androidx.room.RoomDatabase;
 
 import com.matilfa.twentyquestions.data.questions.Question;
 import com.matilfa.twentyquestions.data.questions.QuestionDao;
+import com.matilfa.twentyquestions.data.sessions.QuestionSessionCrossRef;
 import com.matilfa.twentyquestions.data.sessions.Session;
 import com.matilfa.twentyquestions.data.sessions.SessionDao;
 import com.matilfa.twentyquestions.data.sessions.UserSessionCrossRef;
@@ -24,7 +25,8 @@ import java.util.concurrent.Executors;
         Question.class,
         Session.class,
         User.class,
-        UserSessionCrossRef.class
+        UserSessionCrossRef.class,
+        QuestionSessionCrossRef.class
 },
         version = 1, exportSchema = false)
 //todo: fix data migration

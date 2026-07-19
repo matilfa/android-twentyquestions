@@ -3,10 +3,10 @@ package com.matilfa.twentyquestions.data.sessions;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 
-@Entity(primaryKeys = {"userId", "sessionId"})
-public class UserSessionCrossRef {
+@Entity(primaryKeys = {"questionId", "sessionId"})
+public class QuestionSessionCrossRef {
     @NonNull
-    public Long userId;
+    public Long questionId;
     @NonNull
     public Long sessionId;
 }

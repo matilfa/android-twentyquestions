@@ -1,5 +1,6 @@
 package com.matilfa.twentyquestions.data.sessions;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -14,13 +15,13 @@ import java.util.List;
 @Dao
 public interface SessionDao {
     @Query("SELECT * FROM session")
-    List<Session> getAll();
+    LiveData<List<Session>> getAll();
 
     @Query("SELECT * FROM session WHERE sessionId = :id")
-    Session getById(int id);
+    LiveData<Session> getById(Long id);
 
     @Query("SELECT * FROM session WHERE name LIKE :name")
-    Session getByName(String name);
+    LiveData<Session> getByName(String name);
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     Long insertSession(Session session);
@@ -31,4 +32,11 @@ public interface SessionDao {
     @Transaction
     @Query("SELECT * FROM session")
     List<SessionWithUsers> getSessionsWithUsers();
+
+    @Transaction
+    @Query("SELECT * FROM session WHERE sessionId = :id")
+    SessionWithAskedQuestions getSessionByIdWithAskedQuestions(Long id);
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    Long insertQuestionSessionCrossRef(QuestionSessionCrossRef crossRef);
 }

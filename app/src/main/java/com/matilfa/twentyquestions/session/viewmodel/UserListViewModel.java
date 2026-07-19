@@ -24,7 +24,7 @@ public class UserListViewModel extends ViewModel {
     private final MutableLiveData<List<User>> selectedUsers;
     private UserRepository userRepository;
     private SessionRepository sessionRepository;
-    private Session createdSession;
+    private MutableLiveData<Session> createdSession = new MutableLiveData<Session>();
 
     @Inject
     public UserListViewModel(@NonNull UserRepository userRepository, @NonNull SessionRepository sessionRepository) {
@@ -42,7 +42,7 @@ public class UserListViewModel extends ViewModel {
         return selectedUsers;
     }
 
-    public Session getCreatedSession() {
+    public MutableLiveData<Session> getCreatedSession() {
         return createdSession;
     }
 
@@ -76,6 +76,7 @@ public class UserListViewModel extends ViewModel {
 
     /**
      * Removes a user from the list of selected users for the new session.
+     *
      * @param user
      */
     public void removeSelectedUser(User user) {
@@ -86,6 +87,7 @@ public class UserListViewModel extends ViewModel {
 
     /**
      * Saves the new session in the database.
+     *
      * @param sessionName
      * @return
      */
@@ -94,16 +96,17 @@ public class UserListViewModel extends ViewModel {
             throw new RuntimeException("There must be at least one user in a session.");
         }
 
-        if (sessionName == null ||sessionName.isBlank()) {
+        if (sessionName == null || sessionName.isBlank()) {
             throw new RuntimeException("Invalid name for session.");
         }
 
-        if (sessionRepository.getSessionByName(sessionName) != null) {
+        if (sessionRepository.getSessionByName(sessionName).getValue() != null) {
             throw new RuntimeException("A session with that name already exists.");
         }
 
-        createdSession = sessionRepository.createSession(sessionName, selectedUsers.getValue());
+        sessionRepository.createSession(sessionName, selectedUsers.getValue());
+        createdSession.setValue(sessionRepository.getSessionByName(sessionName).getValue());
 
-        return (createdSession != null && createdSession.sessionId != null);
+        return createdSession.getValue().name != null;
     }
 }
