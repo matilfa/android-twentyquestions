@@ -37,6 +37,7 @@ public class QuestionsRepository {
         this.questionDao = questionDao;
         this.sessionDao = sessionDao;
         this.userDao = userDao;
+        questions = new MutableLiveData<List<Question>>();
     }
 
     public void initDatabase(){
@@ -109,8 +110,8 @@ public class QuestionsRepository {
         return questionDao;
     }
 
-    public LiveData<List<Question>> getQuestions() {
-        if (questions.getValue() == null || questions.getValue().isEmpty()) {
+    public MutableLiveData<List<Question>> getQuestions() {
+        if (!questions.isInitialized() || questions.getValue() == null || questions.getValue().isEmpty()) {
             initDatabase();
         }
         return questions;

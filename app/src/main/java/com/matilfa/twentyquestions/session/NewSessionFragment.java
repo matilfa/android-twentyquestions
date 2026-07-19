@@ -58,7 +58,6 @@ public class NewSessionFragment extends Fragment {
         });
         selectedUserListAdapter = new UserListAdapter(user -> {
             userListViewModel.removeSelectedUser(user);
-            Toast.makeText(getContext(), "User " + user.name + " was removed!! :(", Toast.LENGTH_SHORT).show();
         });
 
         RecyclerView userListRecyclerView = getActivity().findViewById(R.id.userlist_recyclerview);
@@ -104,7 +103,7 @@ public class NewSessionFragment extends Fragment {
                 boolean success = userListViewModel.saveNewSession(sessionName);
 
                 if (success) {
-                    long sessionId = userListViewModel.getCreatedSession().sessionId;
+                    Long sessionId = userListViewModel.getCreatedSession().getValue().sessionId;
                     var action = NewSessionFragmentDirections.actionStartNewSession(sessionId);
 
                     NavController navController = Navigation.findNavController(view);
