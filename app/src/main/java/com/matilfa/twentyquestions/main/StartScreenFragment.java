@@ -12,6 +12,9 @@ import android.view.View;
 import android.widget.Button;
 
 import com.matilfa.twentyquestions.R;
+import com.matilfa.twentyquestions.data.questions.QuestionsRepository;
+
+import javax.inject.Inject;
 
 
 public class StartScreenFragment extends Fragment {

@@ -42,6 +42,10 @@ public class UserListViewModel extends ViewModel {
         return selectedUsers;
     }
 
+    public Session getCreatedSession() {
+        return createdSession;
+    }
+
     /**
      * Saves a new user to the database. Creates a {@code User} object using the name parameter.
      *

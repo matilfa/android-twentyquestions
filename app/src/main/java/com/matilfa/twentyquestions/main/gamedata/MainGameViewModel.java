@@ -11,6 +11,7 @@ import com.matilfa.twentyquestions.data.sessions.Session;
 import com.matilfa.twentyquestions.data.sessions.SessionRepository;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.inject.Inject;
 
@@ -23,30 +24,38 @@ public class MainGameViewModel extends ViewModel {
     private final QuestionsRepository questionsRepository;
     private final SessionRepository sessionRepository;
     private Session activeSession;
+//    private final QuestionGameRepository questionGameRepository;
 
     @Inject
-    public MainGameViewModel(@NonNull QuestionsRepository questionsRepository, @NonNull SessionRepository sessionRepository, Session activeSession) {
+    public MainGameViewModel(@NonNull QuestionsRepository questionsRepository, @NonNull SessionRepository sessionRepository) {
         this.questionsRepository = questionsRepository;
         this.sessionRepository = sessionRepository;
-        this.activeSession = activeSession;
+        questionsRepository.initDatabase();
+
+//        questionGameRepository = new QuestionGameRepository()
+        //        this.activeSession = ;
 
         if (activeSession != null && activeSession.sessionId != null) {
             initSessionData();
-        }
-        else {
+        } else {
             allQuestions = questionsRepository.getQuestions();
             questionsAsked = new MutableLiveData<List<Question>>();
         }
     }
 
 
-    public MainGameViewModel(QuestionsRepository questionsRepository, SessionRepository sessionRepository) {
-        this(questionsRepository, sessionRepository, null);
-    }
-
     private void initSessionData() {
         //Todo: get questions from db for session
     }
 
 
+    public Question generateRandomQuestion() {
+        int randomNo = ThreadLocalRandom
+                .current()
+                .nextInt(0, allQuestions.getValue().size() + 1);
+        return allQuestions.getValue().get(randomNo);        
+    }
+
+    public void registerAskedQuestion(Question question) {
+    }
 }

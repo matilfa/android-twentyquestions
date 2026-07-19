@@ -1,6 +1,5 @@
 package com.matilfa.twentyquestions.data.questions;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -14,7 +13,7 @@ import java.util.List;
 @Dao
 public interface QuestionDao {
     @Query("SELECT * FROM question")
-    LiveData<List<Question>> getAll();
+    List<Question> getAll();
 
     @Query("SELECT * FROM question WHERE questionId = :id")
     Question getById(int id);

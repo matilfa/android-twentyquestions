@@ -11,11 +11,15 @@ import androidx.core.view.WindowInsetsCompat;
 import com.matilfa.twentyquestions.R;
 import com.matilfa.twentyquestions.data.questions.QuestionsRepository;
 
+import javax.inject.Inject;
+
 import dagger.hilt.android.AndroidEntryPoint;
+import dagger.hilt.android.qualifiers.ApplicationContext;
 
 @AndroidEntryPoint
 public class StartScreenActivity extends AppCompatActivity {
 //    private SessionViewModel sessionViewModel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +27,6 @@ public class StartScreenActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_start_screen);
 
-        var twentyQuestionsRepository = new QuestionsRepository(this);
-        twentyQuestionsRepository.initDatabase();
 
 //        sessionViewModel = new ViewModelProvider(this).get(SessionViewModel.class);
 
