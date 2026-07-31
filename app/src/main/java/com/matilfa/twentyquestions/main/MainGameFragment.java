@@ -37,11 +37,11 @@ public class MainGameFragment extends Fragment {
             if (sessionId > 0) {
                 viewModel.setActiveSession(sessionId);
             }
-            //todo else: nån annan lista för frågorna typ
+            else {
+                viewModel.setupNonSessionMode();
+            }
 
         });
-//        var questionGameRepository = new QuestionGameRepository(getActivity().getApplicationContext(),
-//                getActivity().findViewById(R.id.questionText));
 
         Button nextButton = getActivity().findViewById(R.id.nextQuestionButton);
 

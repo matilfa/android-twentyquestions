@@ -25,10 +25,10 @@ public class MainGameViewModel extends ViewModel {
     private MutableLiveData<List<Question>> allQuestions;
 
     private MutableLiveData<List<Question>> sessionQuestions = new MutableLiveData<>();
-    private MutableLiveData<List<Question>> questionsAsked;
+    private MutableLiveData<List<Question>> questionsAsked = new MutableLiveData<>(new ArrayList<Question>());
     private final QuestionsRepository questionsRepository;
     private final SessionRepository sessionRepository;
-    private MutableLiveData<Session> activeSession = new MutableLiveData<Session>();
+    private Session activeSession;
 
     @Inject
     public MainGameViewModel(@NonNull QuestionsRepository questionsRepository, @NonNull SessionRepository sessionRepository) {
@@ -36,33 +36,18 @@ public class MainGameViewModel extends ViewModel {
         this.sessionRepository = sessionRepository;
         questionsRepository.initDatabase();
 
-        questionsAsked = new MutableLiveData<>(new ArrayList<Question>());
+//        questionsAsked = new MutableLiveData<>(new ArrayList<Question>());
         allQuestions = questionsRepository.getQuestions();
 
-//        allQuestions.observe(this, allQuestions -> {
-//
-//        });
-
-//        questionGameRepository = new QuestionGameRepository()
-        //        this.activeSession = ;
-
-//        if (activeSession != null && activeSession.sessionId != null && activeSession.sessionId > 0) {
-//            initSessionData();
-//        }
     }
 
     public MutableLiveData<List<Question>> getAllQuestions() {
         return allQuestions;
     }
 
-    public MutableLiveData<Session> getActiveSession() {
-        return activeSession;
-    }
-
     public void setActiveSession(Long sessionId) {
         TwentyQuestionsDatabase.databaseWriteExecutor.execute(() -> {
-            var session = sessionRepository.getSessionById(sessionId);
-            activeSession.postValue(session);
+            activeSession = sessionRepository.getSessionById(sessionId);
             initSessionData(sessionId);
         });
     }
@@ -79,6 +64,10 @@ public class MainGameViewModel extends ViewModel {
 
     }
 
+    public void setupNonSessionMode() {
+        sessionQuestions.postValue(allQuestions.getValue());
+    }
+
 
     public Question generateRandomQuestion() {
         int randomNo = ThreadLocalRandom
@@ -90,9 +79,9 @@ public class MainGameViewModel extends ViewModel {
     public void registerAskedQuestion(Question question) {
         TwentyQuestionsDatabase.databaseWriteExecutor.execute(() -> {
 
-            if (activeSession.getValue() != null) {
+            if (activeSession != null) {
                 var successfulInsert = sessionRepository
-                        .registerQuestionAskedInSession(question.questionId, activeSession.getValue().sessionId);
+                        .registerQuestionAskedInSession(question.questionId, activeSession.sessionId);
 
                 if (!successfulInsert) {
                     throw new RuntimeException("Something went wrong when registering asked question.");
