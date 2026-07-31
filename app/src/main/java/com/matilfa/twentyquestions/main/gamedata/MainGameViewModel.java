@@ -23,6 +23,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 @HiltViewModel
 public class MainGameViewModel extends ViewModel {
     private MutableLiveData<List<Question>> allQuestions;
+
+    private MutableLiveData<List<Question>> sessionQuestions = new MutableLiveData<>();
     private MutableLiveData<List<Question>> questionsAsked;
     private final QuestionsRepository questionsRepository;
     private final SessionRepository sessionRepository;
@@ -37,6 +39,10 @@ public class MainGameViewModel extends ViewModel {
         questionsAsked = new MutableLiveData<>(new ArrayList<Question>());
         allQuestions = questionsRepository.getQuestions();
 
+//        allQuestions.observe(this, allQuestions -> {
+//
+//        });
+
 //        questionGameRepository = new QuestionGameRepository()
         //        this.activeSession = ;
 
@@ -45,23 +51,31 @@ public class MainGameViewModel extends ViewModel {
 //        }
     }
 
+    public MutableLiveData<List<Question>> getAllQuestions() {
+        return allQuestions;
+    }
+
     public MutableLiveData<Session> getActiveSession() {
         return activeSession;
     }
 
     public void setActiveSession(Long sessionId) {
-        var session = sessionRepository.getSessionById(sessionId);
-        activeSession.setValue(session.getValue());
-        initSessionData();
+        TwentyQuestionsDatabase.databaseWriteExecutor.execute(() -> {
+            var session = sessionRepository.getSessionById(sessionId);
+            activeSession.postValue(session);
+            initSessionData(sessionId);
+        });
     }
 
-    private void initSessionData() {
+    private void initSessionData(Long sessionId) {
         SessionWithAskedQuestions savedSession = sessionRepository
-                .getSavedSessionWithAskedQuestions(activeSession.getValue().sessionId);
+                .getSavedSessionWithAskedQuestions(sessionId);
 
-        //todo Fix better
-        questionsAsked.setValue(savedSession.askedQuestions);
-        allQuestions.getValue().removeAll(savedSession.askedQuestions);
+        questionsAsked.postValue(savedSession.askedQuestions);
+        var remainingQs = new ArrayList<>(allQuestions.getValue());
+        remainingQs.removeAll(savedSession.askedQuestions);
+
+        sessionQuestions.postValue(remainingQs);
 
     }
 
@@ -69,25 +83,29 @@ public class MainGameViewModel extends ViewModel {
     public Question generateRandomQuestion() {
         int randomNo = ThreadLocalRandom
                 .current()
-                .nextInt(0, allQuestions.getValue().size() + 1);
-        return allQuestions.getValue().get(randomNo);
+                .nextInt(0, sessionQuestions.getValue().size() + 1);
+        return sessionQuestions.getValue().get(randomNo);
     }
 
     public void registerAskedQuestion(Question question) {
         TwentyQuestionsDatabase.databaseWriteExecutor.execute(() -> {
-            var successfulInsert = sessionRepository
-                    .registerQuestionAskedInSession(question.questionId, activeSession.getValue().sessionId);
 
-            if (!successfulInsert) {
-                throw new RuntimeException("Something went wrong when registering asked question.");
+            if (activeSession.getValue() != null) {
+                var successfulInsert = sessionRepository
+                        .registerQuestionAskedInSession(question.questionId, activeSession.getValue().sessionId);
+
+                if (!successfulInsert) {
+                    throw new RuntimeException("Something went wrong when registering asked question.");
+                }
             }
+
             List<Question> askedQsUpdate = questionsAsked.getValue();
             askedQsUpdate.add(question);
-            questionsAsked.setValue(askedQsUpdate);
+            questionsAsked.postValue(askedQsUpdate);
 
-            List<Question> remainingQs = allQuestions.getValue();
+            List<Question> remainingQs = sessionQuestions.getValue();
             remainingQs.remove(question);
-            allQuestions.setValue(remainingQs);
+            sessionQuestions.postValue(remainingQs);
         });
     }
 }

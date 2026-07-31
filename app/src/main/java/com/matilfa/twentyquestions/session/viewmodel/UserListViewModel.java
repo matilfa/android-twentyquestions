@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.matilfa.twentyquestions.data.TwentyQuestionsDatabase;
 import com.matilfa.twentyquestions.data.sessions.Session;
 import com.matilfa.twentyquestions.data.sessions.SessionRepository;
 import com.matilfa.twentyquestions.data.sessions.UserSessionCrossRef;
@@ -91,22 +92,25 @@ public class UserListViewModel extends ViewModel {
      * @param sessionName
      * @return
      */
-    public boolean saveNewSession(String sessionName) {
-        if (!selectedUsers.isInitialized() || selectedUsers.getValue().isEmpty()) {
-            throw new RuntimeException("There must be at least one user in a session.");
-        }
+    public void saveNewSession(String sessionName) {
+        TwentyQuestionsDatabase.databaseWriteExecutor.execute(() -> {
 
-        if (sessionName == null || sessionName.isBlank()) {
-            throw new RuntimeException("Invalid name for session.");
-        }
+            if (!selectedUsers.isInitialized() || selectedUsers.getValue().isEmpty()) {
+                throw new RuntimeException("There must be at least one user in a session.");
+            }
 
-        if (sessionRepository.getSessionByName(sessionName).getValue() != null) {
-            throw new RuntimeException("A session with that name already exists.");
-        }
+            if (sessionName == null || sessionName.isBlank()) {
+                throw new RuntimeException("Invalid name for session.");
+            }
 
-        sessionRepository.createSession(sessionName, selectedUsers.getValue());
-        createdSession.setValue(sessionRepository.getSessionByName(sessionName).getValue());
+            if (sessionRepository.getSessionByName(sessionName) != null) {
+                throw new RuntimeException("A session with that name already exists.");
+            }
 
-        return createdSession.getValue().name != null;
+            sessionRepository.createSession(sessionName, selectedUsers.getValue());
+            Session sessionByName = sessionRepository.getSessionByName(sessionName);
+            createdSession.postValue(sessionByName);
+        });
+
     }
 }

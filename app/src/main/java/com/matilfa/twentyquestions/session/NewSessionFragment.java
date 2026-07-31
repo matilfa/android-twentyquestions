@@ -94,28 +94,40 @@ public class NewSessionFragment extends Fragment {
             }
         });
 
+
         Button startButton = getActivity().findViewById((R.id.startNewSessionButton));
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText editText = getActivity().findViewById(R.id.inputSessionName);
-                String sessionName = editText.getText().toString();
-                boolean success = userListViewModel.saveNewSession(sessionName);
-
-                if (success) {
-                    Long sessionId = userListViewModel.getCreatedSession().getValue().sessionId;
-                    var action = NewSessionFragmentDirections.actionStartNewSession(sessionId);
-
-                    NavController navController = Navigation.findNavController(view);
-                    navController.navigate(action);
-                }
-                else {
+                try {
+                    onStartNewSessionClick(view);
+                } catch (RuntimeException e) {
                     Toast.makeText(getActivity(), "Something went wrong.", Toast.LENGTH_SHORT).show(); //todo: fix proper error handling
+                    e.printStackTrace();
                 }
-
             }
         });
 
+
+    }
+
+    private void onStartNewSessionClick(View view) {
+        EditText editText = getActivity().findViewById(R.id.inputSessionName);
+        String sessionName = editText.getText().toString();
+
+        userListViewModel.getCreatedSession().observe(getViewLifecycleOwner(), session -> {
+
+            if (session != null && session.sessionId != null) {
+                var action = com.matilfa.twentyquestions.session.NewSessionFragmentDirections.actionStartNewSession(session.sessionId);
+
+                NavController navController = Navigation.findNavController(view);
+                navController.navigate(action);
+            } else {
+                throw new RuntimeException("Failed to launch new session.");
+            }
+        });
+
+        userListViewModel.saveNewSession(sessionName);
     }
 
 

@@ -32,12 +32,16 @@ public class MainGameFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         viewModel = new ViewModelProvider(this).get(MainGameViewModel.class);
+        viewModel.getAllQuestions().observe(getViewLifecycleOwner(), allQuestions -> {
+            Long sessionId = getArguments().getLong("sessionId");
+            if (sessionId > 0) {
+                viewModel.setActiveSession(sessionId);
+            }
+            //todo else: nån annan lista för frågorna typ
+
+        });
 //        var questionGameRepository = new QuestionGameRepository(getActivity().getApplicationContext(),
 //                getActivity().findViewById(R.id.questionText));
-        Long sessionId = getArguments().getLong("sessionId");
-        if (sessionId > 0) {
-            viewModel.setActiveSession(sessionId);
-        }
 
         Button nextButton = getActivity().findViewById(R.id.nextQuestionButton);
 

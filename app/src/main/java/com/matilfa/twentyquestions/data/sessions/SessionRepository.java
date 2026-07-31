@@ -41,11 +41,11 @@ public class SessionRepository {
         return sessionDao.getAll();
     }
 
-    public LiveData<Session> getSessionByName(@NonNull String sessionName) {
+    public Session getSessionByName(@NonNull String sessionName) {
         return sessionDao.getByName(sessionName);
     }
 
-    public LiveData<Session> getSessionById(Long sessionId) {
+    public Session getSessionById(Long sessionId) {
         return sessionDao.getById(sessionId);
     }
 
@@ -60,7 +60,6 @@ public class SessionRepository {
      */
     @Transaction
     public void createSession(String sessionName, List<User> usersInSession) {
-        TwentyQuestionsDatabase.databaseWriteExecutor.execute(() -> {
             Session session = new Session();
             session.name = sessionName;
             session.sessionId = sessionDao.insertSession(session);
@@ -76,7 +75,6 @@ public class SessionRepository {
             }
             sessionDao.insertAllUserCrossRefs(crossRefs);
 
-        });
     }
 
     /**

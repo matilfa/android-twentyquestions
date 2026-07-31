@@ -42,9 +42,7 @@ public class QuestionsRepository {
 
     public void initDatabase(){
         TwentyQuestionsDatabase.databaseWriteExecutor.execute(() -> {
-            if (questionDao == null) {
-                System.out.println("null!!");
-            }
+
             if (questionDao.getQuestionCount() == 0) {
                 List<Question> questionsToAdd = extractQuestionsFromFile();
                 questionDao.insertAll(questionsToAdd);

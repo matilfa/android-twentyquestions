@@ -18,10 +18,10 @@ public interface SessionDao {
     LiveData<List<Session>> getAll();
 
     @Query("SELECT * FROM session WHERE sessionId = :id")
-    LiveData<Session> getById(Long id);
+    Session getById(Long id);
 
     @Query("SELECT * FROM session WHERE name LIKE :name")
-    LiveData<Session> getByName(String name);
+    Session getByName(String name);
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     Long insertSession(Session session);
