@@ -33,4 +33,7 @@
     <string name="gameHistoryNavItem">History</string>
     <string name="gameMembersNavItem">Members</string>
 
+    <string name="historyTabLabel">Questions asked in this session</string>
+    <string name="membersTabLabel">Members of this session</string>
+
 </resources>

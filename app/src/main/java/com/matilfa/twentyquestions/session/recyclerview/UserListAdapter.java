@@ -45,6 +45,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserItemViewHolder> {
         } else {
             holder.getButton().setImageResource(R.drawable.outline_add_24);
         }
+        //todo remove hasAddButton stuff
     }
 
     @Override

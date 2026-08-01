@@ -45,6 +45,10 @@ public class MainGameViewModel extends ViewModel {
         return allQuestions;
     }
 
+    public MutableLiveData<List<Question>> getQuestionsAsked() {
+        return questionsAsked;
+    }
+
     public void setActiveSession(Long sessionId) {
         TwentyQuestionsDatabase.databaseWriteExecutor.execute(() -> {
             activeSession = sessionRepository.getSessionById(sessionId);

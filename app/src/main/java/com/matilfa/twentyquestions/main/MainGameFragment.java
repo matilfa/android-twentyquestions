@@ -50,18 +50,6 @@ public class MainGameFragment extends Fragment {
 
         });
 
-//        Button nextButton = getActivity().findViewById(R.id.nextQuestionButton);
-//
-//        nextButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                TextView tv = getActivity().findViewById(R.id.questionText);
-//                Question question = viewModel.generateRandomQuestion();
-//
-//                tv.setText(question.questionNumber + ". " + question.text); //Todo: Fix resource string
-//                viewModel.registerAskedQuestion(question);
-//            }
-//        });
 
         NavHostFragment navHostFragment = (NavHostFragment) getChildFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment_in_game);

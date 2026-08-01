@@ -34,5 +34,7 @@
     <string name="gameHistoryNavItem">Historik</string>
     <string name="gameMembersNavItem">Deltagare</string>
 
+    <string name="historyTabLabel">Frågor frågade under sessionen</string>
+    <string name="membersTabLabel">Deltagare i sessionen</string>
 
 </resources>
