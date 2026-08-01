@@ -14,6 +14,9 @@ import com.matilfa.twentyquestions.R;
 
 
 public class GameHistoryFragment extends Fragment {
+    public GameHistoryFragment() {
+        super(R.layout.fragment_game_history);
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

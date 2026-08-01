@@ -14,6 +14,10 @@ import com.matilfa.twentyquestions.R;
 
 
 public class GameMembersFragment extends Fragment {
+    public GameMembersFragment() {
+        super(R.layout.fragment_game_members);
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
