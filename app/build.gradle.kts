@@ -108,4 +108,8 @@ dependencies {
     //Mockito
     testImplementation("org.mockito:mockito-core:5.23.0")
 
+    //bottom navigation bar
+    implementation("androidx.navigation:navigation-fragment:2.9.3")
+    implementation("androidx.navigation:navigation-ui:2.9.3")
+
 }

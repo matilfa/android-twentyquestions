@@ -29,5 +29,10 @@
     <string name="labelSelectedMembers">Valda till sessionen</string>
 
 
+    <!--    Main game nav bar items -->
+    <string name="mainGameHomeNavItem">Fråga frågor</string>
+    <string name="gameHistoryNavItem">Historik</string>
+    <string name="gameMembersNavItem">Deltagare</string>
+
 
 </resources>

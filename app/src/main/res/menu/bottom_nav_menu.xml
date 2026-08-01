@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/game_home_fragment"
+        android:title="@string/mainGameHomeNavItem"
+        android:icon="@drawable/ic_nav_maingame"/>
+<item
+        android:id="@+id/gameHistoryFragment"
+        android:title="@string/gameHistoryNavItem"
+        android:icon="@drawable/ic_history_nav_item"/>
+    <item
+        android:id="@+id/gameMembersFragment"
+        android:title="@string/gameMembersNavItem"
+        android:icon="@drawable/ic_members_nav_item"/>
+
+
+</menu>

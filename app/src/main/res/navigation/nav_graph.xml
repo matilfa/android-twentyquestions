@@ -24,7 +24,7 @@
         tools:layout="@layout/fragment_load_session" >
         <action
             android:id="@+id/action_loadSessionFragment_to_mainGameFragment"
-            app:destination="@id/mainGameFragment" />
+            app:destination="@id/nav_graph_in_game" />
     </fragment>
     <fragment
         android:id="@+id/newSessionFragment"
@@ -36,7 +36,7 @@
             app:destination="@id/createUserDialogFragment" />
         <action
             android:id="@+id/action_startNewSession"
-            app:destination="@id/mainGameFragment" />
+            app:destination="@id/nav_graph_in_game" />
     </fragment>
     <dialog
         android:id="@+id/createUserDialogFragment"
@@ -48,26 +48,86 @@
             app:destination="@id/newSessionFragment" />
     </dialog>
     <fragment
-        android:id="@+id/mainGameFragment"
-        android:name="com.matilfa.twentyquestions.main.MainGameFragment"
-        android:label="fragment_main_game"
-        tools:layout="@layout/fragment_main_game">
-        <argument
-            android:name="sessionId"
-            app:argType="long" />
-    </fragment>
-    <fragment
         android:id="@+id/startScreenFragment"
         android:name="com.matilfa.twentyquestions.main.StartScreenFragment"
         android:label="fragment_start_screen"
         tools:layout="@layout/fragment_start_screen">
         <action
             android:id="@+id/action_startScreenFragment_to_mainGameFragment"
-            app:destination="@id/mainGameFragment" />
+            app:destination="@id/nav_graph_in_game" />
         <action
             android:id="@+id/action_startScreenFragment_to_topSessionFragment2"
             app:destination="@id/topSessionFragment2" />
     </fragment>
 
+
+
+    <navigation
+        android:id="@+id/nav_graph_in_game"
+        app:startDestination="@id/mainGameFragment">
+
+        <argument
+            android:name="sessionId"
+            app:argType="long" />
+
+        <fragment
+            android:id="@+id/mainGameFragment"
+            android:name="com.matilfa.twentyquestions.main.MainGameFragment"
+            android:label="fragment_main_game"
+            tools:layout="@layout/fragment_main_game">
+
+            <action
+                android:id="@+id/action_mainGameFragment_to_gameHistoryFragment"
+                app:destination="@id/gameHistoryFragment" />
+            <action
+                android:id="@+id/action_mainGameFragment_to_game_home_fragment"
+                app:destination="@id/game_home_fragment" />
+            <action
+                android:id="@+id/action_mainGameFragment_to_gameMembersFragment"
+                app:destination="@id/gameMembersFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/game_home_fragment"
+            android:name="com.matilfa.twentyquestions.main.GameHomeFragment"
+            android:label="fragment_game_home"
+            tools:layout="@layout/fragment_game_home">
+            <action
+                android:id="@+id/action_game_home_fragment_to_gameHistoryFragment"
+                app:destination="@id/gameHistoryFragment" />
+            <action
+                android:id="@+id/action_game_home_fragment_to_gameMembersFragment"
+                app:destination="@id/gameMembersFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/gameHistoryFragment"
+            android:name="com.matilfa.twentyquestions.main.GameHistoryFragment"
+            android:label="fragment_game_history"
+            tools:layout="@layout/fragment_game_history">
+            <action
+                android:id="@+id/action_gameHistoryFragment_to_gameMembersFragment"
+                app:destination="@id/gameMembersFragment" />
+            <action
+                android:id="@+id/action_gameHistoryFragment_to_mainGameFragment"
+                app:destination="@id/mainGameFragment" />
+            <action
+                android:id="@+id/action_gameHistoryFragment_to_game_home_fragment"
+                app:destination="@id/game_home_fragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/gameMembersFragment"
+            android:name="com.matilfa.twentyquestions.main.GameMembersFragment"
+            android:label="fragment_game_members"
+            tools:layout="@layout/fragment_game_members" >
+            <action
+                android:id="@+id/action_gameMembersFragment_to_gameHistoryFragment"
+                app:destination="@id/gameHistoryFragment" />
+            <action
+                android:id="@+id/action_gameMembersFragment_to_mainGameFragment"
+                app:destination="@id/mainGameFragment" />
+            <action
+                android:id="@+id/action_gameMembersFragment_to_game_home_fragment"
+                app:destination="@id/game_home_fragment" />
+        </fragment>
+    </navigation>
 
 </navigation>

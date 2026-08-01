@@ -27,4 +27,10 @@
     <string name="startNewSessionButton">Start session</string>
     <string name="labelSelectedMembers">Selected for this session</string>
 
+
+    <!--    Main game nav bar items -->
+    <string name="mainGameHomeNavItem">Main game</string>
+    <string name="gameHistoryNavItem">History</string>
+    <string name="gameMembersNavItem">Members</string>
+
 </resources>
