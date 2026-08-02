@@ -88,7 +88,7 @@ public class NewSessionFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 var dialogFragment = new CreateUserDialogFragment();
-                dialogFragment.show(getParentFragmentManager(), null);
+                dialogFragment.show(getChildFragmentManager(), null);
 
 //                Navigation.findNavController(view).navigate(R.id.action_newSessionFragment_to_createUserDialogFragment);
             }
@@ -102,7 +102,7 @@ public class NewSessionFragment extends Fragment {
                 try {
                     onStartNewSessionClick(view);
                 } catch (RuntimeException e) {
-                    Toast.makeText(getActivity(), "Something went wrong.", Toast.LENGTH_SHORT).show(); //todo: fix proper error handling
+                    Toast.makeText(getActivity(), "Something went wrong: " + e.getMessage(), Toast.LENGTH_SHORT).show(); //todo: fix proper error handling
                     e.printStackTrace();
                 }
             }
@@ -112,7 +112,7 @@ public class NewSessionFragment extends Fragment {
     }
 
     private void onStartNewSessionClick(View view) {
-        EditText editText = view.findViewById(R.id.inputSessionName);
+        EditText editText = getView().findViewById(R.id.inputSessionName);
         String sessionName = editText.getText().toString();
 
         userListViewModel.getCreatedSession().observe(getViewLifecycleOwner(), session -> {

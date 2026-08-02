@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 
 import com.matilfa.twentyquestions.data.TwentyQuestionsDatabase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,16 +19,18 @@ import dagger.hilt.android.qualifiers.ApplicationContext;
 public class UserRepository {
     private final Context context;
     private UserDao userDao;
-    private LiveData<List<User>> allUsers;
+    private List<User> allUsers = new ArrayList<>();
 
     @Inject
     public UserRepository(@ApplicationContext Context context) {
         this.context = context;
         userDao = TwentyQuestionsDatabase.getInstance(context).userDao();
-        allUsers = userDao.getAll();
     }
 
-    public LiveData<List<User>> getAllUsers() {
+    public List<User> getAllUsers() {
+        if (allUsers.isEmpty()) {
+            allUsers = userDao.getAll();
+        }
         return allUsers;
     }
 

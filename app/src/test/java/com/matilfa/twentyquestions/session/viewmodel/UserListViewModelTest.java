@@ -38,7 +38,7 @@ public class UserListViewModelTest {
         userListSnapshot = new ArrayList<>();
         liveDataUsers = new MutableLiveData<>(userListSnapshot);
 
-        when(mockUserRepo.getAllUsers()).thenReturn(liveDataUsers);
+        when(mockUserRepo.getAllUsers()).thenReturn(liveDataUsers.getValue());
 
         userListViewModel = new UserListViewModel(mockUserRepo, mockSessionRepo);
     }

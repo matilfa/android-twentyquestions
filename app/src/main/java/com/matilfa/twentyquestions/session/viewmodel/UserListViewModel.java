@@ -21,7 +21,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 
 @HiltViewModel
 public class UserListViewModel extends ViewModel {
-    private final LiveData<List<User>> allUsers;
+    private final MutableLiveData<List<User>> allUsers = new MutableLiveData<>();
     private final MutableLiveData<List<User>> selectedUsers;
     private UserRepository userRepository;
     private SessionRepository sessionRepository;
@@ -31,11 +31,17 @@ public class UserListViewModel extends ViewModel {
     public UserListViewModel(@NonNull UserRepository userRepository, @NonNull SessionRepository sessionRepository) {
         this.userRepository = userRepository;
         this.sessionRepository = sessionRepository;
-        allUsers = userRepository.getAllUsers();
+        initUsers();
         this.selectedUsers = new MutableLiveData<List<User>>();
     }
 
-    public LiveData<List<User>> getAllUsers() {
+    private void initUsers() {
+        TwentyQuestionsDatabase.databaseWriteExecutor.execute(() -> {
+            allUsers.postValue(userRepository.getAllUsers());
+        });
+    }
+
+    public MutableLiveData<List<User>> getAllUsers() {
         return allUsers;
     }
 
@@ -55,7 +61,13 @@ public class UserListViewModel extends ViewModel {
     public void addNewUser(String name) {
         var user = new User();
         user.name = name;
-        userRepository.addNewUser2(user);
+        if (!allUsers.getValue().contains(user)) {
+            userRepository.addNewUser2(user);
+            var updatedUsers = new ArrayList<User>(allUsers.getValue());
+            updatedUsers.add(user);
+
+            allUsers.postValue(updatedUsers);
+        }
     }
 
     /**
@@ -95,6 +107,7 @@ public class UserListViewModel extends ViewModel {
     public void saveNewSession(String sessionName) {
         TwentyQuestionsDatabase.databaseWriteExecutor.execute(() -> {
 
+            //todo fix multithreaded error handling
             if (!selectedUsers.isInitialized() || selectedUsers.getValue().isEmpty()) {
                 throw new RuntimeException("There must be at least one user in a session.");
             }
@@ -113,4 +126,8 @@ public class UserListViewModel extends ViewModel {
         });
 
     }
+
+//    public User findUserByName(String name) {
+//            return null;
+//    }
 }

@@ -11,10 +11,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.FloatingWindow;
 
 import com.matilfa.twentyquestions.R;
 import com.matilfa.twentyquestions.data.users.UserRepository;
+import com.matilfa.twentyquestions.session.viewmodel.UserListViewModel;
 
 public class CreateUserDialogFragment extends DialogFragment implements FloatingWindow {
     @NonNull
@@ -37,22 +39,20 @@ public class CreateUserDialogFragment extends DialogFragment implements Floating
 
                 String name = nameFld.getText().toString();
 
-                var userRepo = new UserRepository(getActivity().getApplicationContext());
+                UserListViewModel viewModel = new ViewModelProvider(requireParentFragment()).get(UserListViewModel.class);
 
-                //if name is in listview of users then,
-                if (userRepo.getUserByName(name) == null) {
-                    userRepo.addNewUser(name);
-                }
-                else {
-                    Toast.makeText(getActivity().getApplicationContext(),
-                            name + " already exist. Try again with a unique name.",
-                            Toast.LENGTH_LONG).show();
-
-                    dialog.cancel();
+                viewModel.addNewUser(name);
+//                if (viewModel.findUserByName(name) == null) {
+//                } else {
+//                    Toast.makeText(getActivity().getApplicationContext(),
+//                            name + " already exist. Try again with a unique name.",
+//                            Toast.LENGTH_LONG).show();
 //
-//                    TextView tv = dia.findViewById(R.id.userExistsWarnTv);
-//                    tv.setVisibility(VISIBLE);
-                }
+//                    dialog.cancel();
+////
+////                    TextView tv = dia.findViewById(R.id.userExistsWarnTv);
+////                    tv.setVisibility(VISIBLE);
+//                }
             }
         });
 
