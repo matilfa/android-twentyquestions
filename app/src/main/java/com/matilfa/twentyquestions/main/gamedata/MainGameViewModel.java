@@ -97,14 +97,13 @@ public class MainGameViewModel extends ViewModel {
         sessionQuestions.postValue(allQuestions.getValue());
     }
 
-    public Question generateRandomQuestion() {
+    public void generateRandomQuestion() {
         int randomNo = ThreadLocalRandom
                 .current()
                 .nextInt(0, sessionQuestions.getValue().size() + 1);
 
         var randomQuestion = sessionQuestions.getValue().get(randomNo);
         currentQuestion.setValue(randomQuestion);
-        return randomQuestion;
     }
 
     public void registerAskedQuestion(Question question) {

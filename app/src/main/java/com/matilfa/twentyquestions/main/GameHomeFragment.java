@@ -37,8 +37,10 @@ public class GameHomeFragment extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Question question = viewModel.generateRandomQuestion();
-                viewModel.registerAskedQuestion(question);
+                if (viewModel.getCurrentQuestion().getValue() != null) {
+                    viewModel.registerAskedQuestion(viewModel.getCurrentQuestion().getValue());
+                }
+                viewModel.generateRandomQuestion();
             }
         });
 
@@ -51,7 +53,9 @@ public class GameHomeFragment extends Fragment {
         skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (viewModel.getCurrentQuestion().getValue() != null) {
+                    viewModel.generateRandomQuestion();
+                }
             }
         });
     }
