@@ -5,6 +5,8 @@
     <string name="newQuestionButton">Ny fråga</string>
     <string name="displayed_question">%1$d. %2$s</string>
     <string name="inSessionLabel">I session: </string>
+    <string name="skipButton">Hoppa över så länge</string>
+
 
     <!--    In StartScreenActivity-->
     <string name="quickStartButton">Börja slumpa frågor</string>

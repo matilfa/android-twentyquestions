@@ -4,6 +4,7 @@
     <string name="newQuestionButton">New Question</string>
     <string name="displayed_question">%1$d. %2$s</string>
     <string name="inSessionLabel">In session: </string>
+    <string name="skipButton">Skip question for now</string>
 
 
     <!--    In StartScreenActivity-->

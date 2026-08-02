@@ -32,17 +32,26 @@ public class GameHomeFragment extends Fragment {
         MainGameFragment mainGameFragment = (MainGameFragment) requireParentFragment().requireParentFragment();
         viewModel = new ViewModelProvider(mainGameFragment).get(MainGameViewModel.class);
 
-
         Button nextButton = view.findViewById(R.id.nextQuestionButton);
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView tv = view.findViewById(R.id.questionText);
                 Question question = viewModel.generateRandomQuestion();
-
-                tv.setText(question.questionNumber + ". " + question.text); //Todo: Fix resource string
                 viewModel.registerAskedQuestion(question);
+            }
+        });
+
+        viewModel.getCurrentQuestion().observe(getViewLifecycleOwner(), question -> {
+            TextView tv = view.findViewById(R.id.questionText);
+            tv.setText(question.questionNumber + ". " + question.text); //Todo: Fix resource string
+        });
+
+        Button skipButton = view.findViewById(R.id.skipButton);
+        skipButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }

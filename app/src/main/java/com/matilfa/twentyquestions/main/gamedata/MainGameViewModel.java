@@ -28,6 +28,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 @HiltViewModel
 public class MainGameViewModel extends ViewModel {
     private MutableLiveData<List<Question>> allQuestions;
+    private MutableLiveData<Question> currentQuestion = new MutableLiveData<>();
 
     private MutableLiveData<List<Question>> sessionQuestions = new MutableLiveData<>();
     private MutableLiveData<List<Question>> questionsAsked = new MutableLiveData<>(new ArrayList<Question>());
@@ -36,7 +37,6 @@ public class MainGameViewModel extends ViewModel {
     private final SessionRepository sessionRepository;
     private Session activeSession;
 
-    private TextView sessionNameLabel;
 
     @Inject
     public MainGameViewModel(@NonNull QuestionsRepository questionsRepository, @NonNull SessionRepository sessionRepository) {
@@ -63,6 +63,10 @@ public class MainGameViewModel extends ViewModel {
 
     public Session getActiveSession() {
         return activeSession;
+    }
+
+    public MutableLiveData<Question> getCurrentQuestion() {
+        return currentQuestion;
     }
 
     public void setActiveSession(Long sessionId, TextView sessionNameLabel) {
@@ -97,7 +101,10 @@ public class MainGameViewModel extends ViewModel {
         int randomNo = ThreadLocalRandom
                 .current()
                 .nextInt(0, sessionQuestions.getValue().size() + 1);
-        return sessionQuestions.getValue().get(randomNo);
+
+        var randomQuestion = sessionQuestions.getValue().get(randomNo);
+        currentQuestion.setValue(randomQuestion);
+        return randomQuestion;
     }
 
     public void registerAskedQuestion(Question question) {
