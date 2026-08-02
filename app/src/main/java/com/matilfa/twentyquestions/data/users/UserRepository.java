@@ -3,7 +3,6 @@ package com.matilfa.twentyquestions.data.users;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 
 import com.matilfa.twentyquestions.data.TwentyQuestionsDatabase;
 
@@ -19,7 +18,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext;
 public class UserRepository {
     private final Context context;
     private UserDao userDao;
-    private List<User> allUsers = new ArrayList<>();
 
     @Inject
     public UserRepository(@ApplicationContext Context context) {
@@ -28,49 +26,44 @@ public class UserRepository {
     }
 
     public List<User> getAllUsers() {
-        if (allUsers.isEmpty()) {
-            allUsers = userDao.getAll();
-        }
-        return allUsers;
+        return userDao.getAll();
     }
 
-    public void addNewUser(@NonNull String userName) {
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                if (userDao.getByName(userName) != null) {
-                    throw new RuntimeException(String.format(
-                            "The user '%s' already exists in database.%n", userName));
-                }
-                var user = new User();
-                user.name = userName;
-
-                userDao.insertUser(user);
-                if (userDao.getByName(userName) == null) {
-                    throw new RuntimeException(String.format(
-                            "Failed to insert value '%s' into database.%n", userName));
-                }
-            }
-        });
-
-        thread.start();
-    }
-
-    public void addNewUser2(@NonNull User user) {
-        TwentyQuestionsDatabase.databaseWriteExecutor.execute(() ->
-                userDao.insertUser(user)
-        );
-    }
-
-    public User getUserByName(String name) {
-        return null;
+//    public void addNewUser(@NonNull String userName) {
 //        Thread thread = new Thread(new Runnable() {
 //            @Override
 //            public void run() {
-//                //todo check how to return value from thread...
-////            user = userDao.getByName(name);
+//                if (userDao.getByName(userName) != null) {
+//                    throw new RuntimeException(String.format(
+//                            "The user '%s' already exists in database.%n", userName));
+//                }
+//                var user = new User();
+//                user.name = userName;
+//
+//                userDao.insertUser(user);
+//                if (userDao.getByName(userName) == null) {
+//                    throw new RuntimeException(String.format(
+//                            "Failed to insert value '%s' into database.%n", userName));
+//                }
 //            }
-//        })
+//        });
+//
+//        thread.start();
+//    }
 
+    public void addNewUser(@NonNull User user) {
+                userDao.insertUser(user);
     }
+//
+//    public User getUserByName(String name) {
+//        return null;
+////        Thread thread = new Thread(new Runnable() {
+////            @Override
+////            public void run() {
+////                //todo check how to return value from thread...
+//////            user = userDao.getByName(name);
+////            }
+////        })
+//
+//    }
 }

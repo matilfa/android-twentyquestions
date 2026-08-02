@@ -37,7 +37,7 @@ public class SessionRepository {
         void onInsertComplete(Session newSession);
     }
 
-    public LiveData<List<Session>> getAllSessions() {
+    public List<Session> getAllSessions() {
         return sessionDao.getAll();
     }
 

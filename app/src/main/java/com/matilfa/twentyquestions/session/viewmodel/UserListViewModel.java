@@ -1,14 +1,12 @@
 package com.matilfa.twentyquestions.session.viewmodel;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.matilfa.twentyquestions.data.TwentyQuestionsDatabase;
 import com.matilfa.twentyquestions.data.sessions.Session;
 import com.matilfa.twentyquestions.data.sessions.SessionRepository;
-import com.matilfa.twentyquestions.data.sessions.UserSessionCrossRef;
 import com.matilfa.twentyquestions.data.users.UserRepository;
 import com.matilfa.twentyquestions.data.users.User;
 
@@ -59,15 +57,14 @@ public class UserListViewModel extends ViewModel {
      * @param name
      */
     public void addNewUser(String name) {
-        var user = new User();
-        user.name = name;
-        if (!allUsers.getValue().contains(user)) {
-            userRepository.addNewUser2(user);
-            var updatedUsers = new ArrayList<User>(allUsers.getValue());
-            updatedUsers.add(user);
-
-            allUsers.postValue(updatedUsers);
-        }
+        TwentyQuestionsDatabase.databaseWriteExecutor.execute(() -> {
+            var user = new User();
+            user.name = name;
+            if (!allUsers.getValue().contains(user)) {
+                userRepository.addNewUser(user);
+                allUsers.postValue(userRepository.getAllUsers());
+            }
+        });
     }
 
     /**

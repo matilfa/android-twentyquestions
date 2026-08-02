@@ -15,7 +15,7 @@ import java.util.List;
 @Dao
 public interface SessionDao {
     @Query("SELECT * FROM session")
-    LiveData<List<Session>> getAll();
+    List<Session> getAll();
 
     @Query("SELECT * FROM session WHERE sessionId = :id")
     Session getById(Long id);

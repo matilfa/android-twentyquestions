@@ -42,6 +42,8 @@ public class CreateUserDialogFragment extends DialogFragment implements Floating
                 UserListViewModel viewModel = new ViewModelProvider(requireParentFragment()).get(UserListViewModel.class);
 
                 viewModel.addNewUser(name);
+
+
 //                if (viewModel.findUserByName(name) == null) {
 //                } else {
 //                    Toast.makeText(getActivity().getApplicationContext(),
