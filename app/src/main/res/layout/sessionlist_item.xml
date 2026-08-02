@@ -14,7 +14,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="Session"
-        android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

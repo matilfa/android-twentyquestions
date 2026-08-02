@@ -24,7 +24,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Name"
-        android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/personIcon"
         app:layout_constraintStart_toEndOf="@+id/personIcon"
