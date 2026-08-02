@@ -42,7 +42,7 @@ public class LoadSessionFragment extends Fragment {
             navController.navigate(action);
         });
 
-        RecyclerView sessionRecyclerView = getActivity().findViewById(R.id.sessionlist_recyclerview);
+        RecyclerView sessionRecyclerView = view.findViewById(R.id.sessionlist_recyclerview);
         sessionRecyclerView.setAdapter(sessionListAdapter);
         sessionRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 

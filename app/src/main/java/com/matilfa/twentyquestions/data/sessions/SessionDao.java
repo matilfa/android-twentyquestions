@@ -30,8 +30,8 @@ public interface SessionDao {
     void insertAllUserCrossRefs(List<UserSessionCrossRef> crossRefs);
 
     @Transaction
-    @Query("SELECT * FROM session")
-    List<SessionWithUsers> getSessionsWithUsers();
+    @Query("SELECT * FROM session WHERE sessionId = :id")
+    SessionWithUsers getSessionByIdWithUsers(Long id);
 
     @Transaction
     @Query("SELECT * FROM session WHERE sessionId = :id")

@@ -6,13 +6,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.matilfa.twentyquestions.R;
 import com.matilfa.twentyquestions.main.gamedata.MainGameViewModel;
+import com.matilfa.twentyquestions.main.recyclerview.MembersListAdapter;
 
 
 public class GameMembersFragment extends Fragment {
@@ -29,5 +30,18 @@ public class GameMembersFragment extends Fragment {
         MainGameFragment mainGameFragment = (MainGameFragment) requireParentFragment().requireParentFragment();
         viewModel = new ViewModelProvider(mainGameFragment).get(MainGameViewModel.class);
 
+        MembersListAdapter membersListAdapter = new MembersListAdapter();
+
+        RecyclerView recyclerView = view.findViewById(R.id.game_members_recyclerView);
+        recyclerView.setAdapter(membersListAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+//        membersListAdapter.setUsersInSession(viewModel.getUsersInSession().getValue());
+
+        viewModel.getUsersInSession().observe(getViewLifecycleOwner(), users -> {
+            if (users != null) {
+                membersListAdapter.setUsersInSession(users);
+            }
+        });
     }
 }

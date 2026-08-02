@@ -78,13 +78,22 @@ public class SessionRepository {
     }
 
     /**
-     * Get a specified session from database, containing a member list of all questions asked in that session.
+     * Get a specified session from database, containing a list of all questions asked in that session.
      *
      * @param sessionId
      * @return
      */
     public SessionWithAskedQuestions getSavedSessionWithAskedQuestions(Long sessionId) {
         return sessionDao.getSessionByIdWithAskedQuestions(sessionId);
+    }
+
+    /**
+     * Get a specified session from database, containing a list of all users in that session.
+     * @param sessionId
+     * @return
+     */
+    public SessionWithUsers getSavedSessionWithUsers(Long sessionId) {
+        return sessionDao.getSessionByIdWithUsers(sessionId);
     }
 
     @Transaction

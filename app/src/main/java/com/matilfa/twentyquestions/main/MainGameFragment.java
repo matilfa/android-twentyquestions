@@ -2,21 +2,18 @@ package com.matilfa.twentyquestions.main;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.matilfa.twentyquestions.R;
-import com.matilfa.twentyquestions.data.questions.Question;
 import com.matilfa.twentyquestions.main.gamedata.MainGameViewModel;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -43,13 +40,18 @@ public class MainGameFragment extends Fragment {
         viewModel.getAllQuestions().observe(getViewLifecycleOwner(), allQuestions -> {
             Long sessionId = getArguments().getLong("sessionId");
             if (sessionId > 0) {
-                viewModel.setActiveSession(sessionId);
+                TextView sessionNameTv = view.findViewById(R.id.activeSessionName);
+
+                viewModel.setActiveSession(sessionId, sessionNameTv);
+
+                TextView inSessionLabelTv = view.findViewById(R.id.inSessionLabel);
+                String inSessionLabelText = getString(R.string.inSessionLabel);
+                inSessionLabelTv.setText(inSessionLabelText);
             } else {
                 viewModel.setupNonSessionMode();
             }
 
         });
-
 
         NavHostFragment navHostFragment = (NavHostFragment) getChildFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment_in_game);
@@ -59,10 +61,10 @@ public class MainGameFragment extends Fragment {
 
             BottomNavigationView bottomNavigation = view.findViewById(R.id.bottomNavigationMainGame);
             NavigationUI.setupWithNavController(bottomNavigation, innerNavController);
-        }
-        else {
+        } else {
             throw new RuntimeException("Could not find nested navhost fragment");
         }
+
 
     }
 }

@@ -29,7 +29,7 @@ public class StartScreenFragment extends Fragment {
 
         NavController navController = Navigation.findNavController(view);
 
-        Button quickStartButton = getActivity().findViewById(R.id.quickStartButton);
+        Button quickStartButton = view.findViewById(R.id.quickStartButton);
         quickStartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,7 +37,7 @@ public class StartScreenFragment extends Fragment {
             }
         });
 
-        Button sessionModeButton = getActivity().findViewById(R.id.sessionModeButton);
+        Button sessionModeButton = view.findViewById(R.id.sessionModeButton);
         sessionModeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

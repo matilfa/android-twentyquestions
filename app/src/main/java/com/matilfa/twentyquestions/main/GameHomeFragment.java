@@ -33,12 +33,12 @@ public class GameHomeFragment extends Fragment {
         viewModel = new ViewModelProvider(mainGameFragment).get(MainGameViewModel.class);
 
 
-        Button nextButton = getActivity().findViewById(R.id.nextQuestionButton);
+        Button nextButton = view.findViewById(R.id.nextQuestionButton);
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView tv = getActivity().findViewById(R.id.questionText);
+                TextView tv = view.findViewById(R.id.questionText);
                 Question question = viewModel.generateRandomQuestion();
 
                 tv.setText(question.questionNumber + ". " + question.text); //Todo: Fix resource string

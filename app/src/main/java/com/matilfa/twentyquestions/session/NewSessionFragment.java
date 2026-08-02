@@ -60,12 +60,12 @@ public class NewSessionFragment extends Fragment {
             userListViewModel.removeSelectedUser(user);
         });
 
-        RecyclerView userListRecyclerView = getActivity().findViewById(R.id.userlist_recyclerview);
+        RecyclerView userListRecyclerView = view.findViewById(R.id.userlist_recyclerview);
         userListRecyclerView.setAdapter(userListAdapter);
         userListAdapter.setHasAddButton(true);
         userListRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        RecyclerView selectedUserListRecyclerView = getActivity().findViewById(R.id.selected_users_list_recyclerview);
+        RecyclerView selectedUserListRecyclerView = view.findViewById(R.id.selected_users_list_recyclerview);
         selectedUserListRecyclerView.setAdapter(selectedUserListAdapter);
         selectedUserListAdapter.setHasAddButton(false);
         selectedUserListRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -83,7 +83,7 @@ public class NewSessionFragment extends Fragment {
             }
         });
 
-        Button createNewPlayerButton = getActivity().findViewById(R.id.createNewPlayerButton); //Todo try catch?
+        Button createNewPlayerButton = view.findViewById(R.id.createNewPlayerButton); //Todo try catch?
         createNewPlayerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,7 +95,7 @@ public class NewSessionFragment extends Fragment {
         });
 
 
-        Button startButton = getActivity().findViewById((R.id.startNewSessionButton));
+        Button startButton = view.findViewById((R.id.startNewSessionButton));
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,7 +112,7 @@ public class NewSessionFragment extends Fragment {
     }
 
     private void onStartNewSessionClick(View view) {
-        EditText editText = getActivity().findViewById(R.id.inputSessionName);
+        EditText editText = view.findViewById(R.id.inputSessionName);
         String sessionName = editText.getText().toString();
 
         userListViewModel.getCreatedSession().observe(getViewLifecycleOwner(), session -> {

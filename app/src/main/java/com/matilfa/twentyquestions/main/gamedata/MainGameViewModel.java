@@ -1,16 +1,21 @@
 package com.matilfa.twentyquestions.main.gamedata;
 
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.matilfa.twentyquestions.R;
 import com.matilfa.twentyquestions.data.TwentyQuestionsDatabase;
 import com.matilfa.twentyquestions.data.questions.Question;
 import com.matilfa.twentyquestions.data.questions.QuestionsRepository;
 import com.matilfa.twentyquestions.data.sessions.Session;
 import com.matilfa.twentyquestions.data.sessions.SessionRepository;
 import com.matilfa.twentyquestions.data.sessions.SessionWithAskedQuestions;
+import com.matilfa.twentyquestions.data.sessions.SessionWithUsers;
+import com.matilfa.twentyquestions.data.users.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +31,12 @@ public class MainGameViewModel extends ViewModel {
 
     private MutableLiveData<List<Question>> sessionQuestions = new MutableLiveData<>();
     private MutableLiveData<List<Question>> questionsAsked = new MutableLiveData<>(new ArrayList<Question>());
+    private MutableLiveData<List<User>> usersInSession = new MutableLiveData<>(new ArrayList<User>());
     private final QuestionsRepository questionsRepository;
     private final SessionRepository sessionRepository;
     private Session activeSession;
+
+    private TextView sessionNameLabel;
 
     @Inject
     public MainGameViewModel(@NonNull QuestionsRepository questionsRepository, @NonNull SessionRepository sessionRepository) {
@@ -49,9 +57,20 @@ public class MainGameViewModel extends ViewModel {
         return questionsAsked;
     }
 
-    public void setActiveSession(Long sessionId) {
+    public MutableLiveData<List<User>> getUsersInSession() {
+        return usersInSession;
+    }
+
+    public Session getActiveSession() {
+        return activeSession;
+    }
+
+    public void setActiveSession(Long sessionId, TextView sessionNameLabel) {
         TwentyQuestionsDatabase.databaseWriteExecutor.execute(() -> {
             activeSession = sessionRepository.getSessionById(sessionId);
+            sessionNameLabel.post(() -> {
+                sessionNameLabel.setText(activeSession.name);
+            });
             initSessionData(sessionId);
         });
     }
@@ -66,12 +85,13 @@ public class MainGameViewModel extends ViewModel {
 
         sessionQuestions.postValue(remainingQs);
 
+        SessionWithUsers sessionWithUsers = sessionRepository.getSavedSessionWithUsers(sessionId);
+        usersInSession.postValue(sessionWithUsers.users);
     }
 
     public void setupNonSessionMode() {
         sessionQuestions.postValue(allQuestions.getValue());
     }
-
 
     public Question generateRandomQuestion() {
         int randomNo = ThreadLocalRandom

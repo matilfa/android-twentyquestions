@@ -8,13 +8,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.matilfa.twentyquestions.R;
-import com.matilfa.twentyquestions.data.questions.Question;
+import com.matilfa.twentyquestions.data.users.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HistoryListAdapter extends RecyclerView.Adapter<GenericListItemViewHolder> {
-    private List<Question> askedQuestions = new ArrayList<>();
+public class MembersListAdapter extends RecyclerView.Adapter<GenericListItemViewHolder> {
+    private List<User> usersInSession = new ArrayList<>();
 
     @NonNull
     @Override
@@ -26,17 +26,17 @@ public class HistoryListAdapter extends RecyclerView.Adapter<GenericListItemView
 
     @Override
     public void onBindViewHolder(@NonNull GenericListItemViewHolder holder, int position) {
-        var currentQ = askedQuestions.get(position);
-        holder.getListItemTextView().setText(currentQ.questionNumber + ". " + currentQ.text);
+        var currentUser = usersInSession.get(position);
+        holder.getListItemTextView().setText(currentUser.name);
     }
 
     @Override
     public int getItemCount() {
-        return askedQuestions.size();
+        return usersInSession.size();
     }
 
-    public void setAskedQuestions(List<Question> askedQuestions) {
-        this.askedQuestions = askedQuestions;
+    public void setUsersInSession(List<User> usersInSession) {
+        this.usersInSession = usersInSession;
         notifyDataSetChanged();
     }
 }

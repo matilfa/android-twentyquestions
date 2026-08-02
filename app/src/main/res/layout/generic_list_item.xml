@@ -9,11 +9,11 @@
 
 
     <TextView
-        android:id="@+id/prevQuestionText_tv"
+        android:id="@+id/listItemText_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Question"
+        android:text="Item"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"

@@ -9,9 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.matilfa.twentyquestions.R;
 import com.matilfa.twentyquestions.main.gamedata.MainGameViewModel;
@@ -34,7 +32,7 @@ public class GameHistoryFragment extends Fragment {
 
         HistoryListAdapter historyListAdapter = new HistoryListAdapter();
 
-        RecyclerView recyclerView = getActivity().findViewById(R.id.game_history_recyclerView);
+        RecyclerView recyclerView = view.findViewById(R.id.game_members_recyclerView);
         recyclerView.setAdapter(historyListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
