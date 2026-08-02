@@ -46,7 +46,7 @@ public class GameHomeFragment extends Fragment {
 
         viewModel.getCurrentQuestion().observe(getViewLifecycleOwner(), question -> {
             TextView tv = view.findViewById(R.id.questionText);
-            tv.setText(question.questionNumber + ". " + question.text); //Todo: Fix resource string
+            tv.setText(getString(R.string.displayed_question, question.questionNumber, question.text));
         });
 
         Button skipButton = view.findViewById(R.id.skipButton);
