@@ -44,5 +44,13 @@ public class StartScreenFragment extends Fragment {
                 navController.navigate(R.id.action_startScreenFragment_to_topSessionFragment2);
             }
         });
+
+        Button settingsButton = view.findViewById(R.id.settingsButton);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.action_startScreenFragment_to_settingsFragment);
+            }
+        });
     }
 }

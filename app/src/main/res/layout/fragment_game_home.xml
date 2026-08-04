@@ -47,6 +47,7 @@
         android:layout_marginBottom="128dp"
         android:backgroundTint="@color/Turquise"
         android:text="@string/skipButton"
+        android:textIsSelectable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
