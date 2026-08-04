@@ -19,7 +19,7 @@
         android:ems="10"
         android:inputType="text"
         android:minHeight="48dp"
-        android:text="@string/inputSessionNameText"
+        android:hint="@string/inputSessionNameText"
         android:autofillHints="name"
         app:layout_constraintBottom_toTopOf="@+id/labelSessionMembers"
         app:layout_constraintEnd_toEndOf="parent"
