@@ -40,4 +40,8 @@
     <string name="membersTabLabel">Members of this session</string>
 
 
+    <!--    Settings section -->
+    <string name="editEntityListTitleLabel">Edit or delete a %1$s</string>
+
+
 </resources>

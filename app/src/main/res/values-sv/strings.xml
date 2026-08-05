@@ -40,4 +40,8 @@
     <string name="historyTabLabel">Frågor frågade under sessionen</string>
     <string name="membersTabLabel">Deltagare i sessionen</string>
 
+
+    <!--    Settings section -->
+    <string name="editEntityListTitleLabel">Ändra eller ta bort en %1$s</string>
+
 </resources>
