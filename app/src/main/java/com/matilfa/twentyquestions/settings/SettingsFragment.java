@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,7 +35,13 @@ public class SettingsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         SettingsListAdapter settingsListAdapter = new SettingsListAdapter(settingOption ->  {
-            Toast.makeText(getActivity(), "Hej", Toast.LENGTH_SHORT).show();
+
+            if (settingOption != null) {
+                NavController navController = Navigation.findNavController(view);
+
+                var action = SettingsFragmentDirections.actionSettingsFragmentToDataEditFragment(settingOption);
+                navController.navigate(action);
+            }
         });
 
         RecyclerView settingsRecyclerView = view.findViewById(R.id.settings_recyclerview);

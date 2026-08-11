@@ -77,7 +77,20 @@
         android:id="@+id/settingsFragment"
         android:name="com.matilfa.twentyquestions.settings.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_dataEditFragment"
+            app:destination="@id/dataEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dataEditFragment"
+        android:name="com.matilfa.twentyquestions.settings.DataEditFragment"
+        android:label="fragment_data_edit"
+        tools:layout="@layout/fragment_data_edit" >
+        <argument
+            android:name="settingOption"
+            app:argType="com.matilfa.twentyquestions.settings.SettingOption" />
+    </fragment>
 
 
 </navigation>
