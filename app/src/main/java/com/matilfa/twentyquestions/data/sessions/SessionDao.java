@@ -39,4 +39,7 @@ public interface SessionDao {
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     Long insertQuestionSessionCrossRef(QuestionSessionCrossRef crossRef);
+
+    @Query("DELETE FROM session WHERE name = :name")
+    int deleteSession(String name);
 }

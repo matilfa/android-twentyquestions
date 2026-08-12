@@ -15,4 +15,9 @@ public class Session {
 
     @ColumnInfo(name = "name")
     public String name;
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

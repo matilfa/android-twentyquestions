@@ -1,5 +1,6 @@
 package com.matilfa.twentyquestions.settings;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -36,11 +37,12 @@ public class DataEditFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(DataEditViewModel.class);
         viewModel.initEntityList(DataEditFragmentArgs.fromBundle(getArguments()).getSettingOption());
 
+        //TODO fill out 
         EntityListAdapter entityListAdapter = new EntityListAdapter(entityToEdit -> {
             Toast.makeText(getActivity(), "Edited entity", Toast.LENGTH_SHORT).show();
         }, entityToDelete -> {
-            Toast.makeText(getActivity(), "Deleted entity", Toast.LENGTH_SHORT).show();
-
+//            Toast.makeText(getActivity(), "Deleted entity", Toast.LENGTH_SHORT).show();
+            showDeleteConfirmation(entityToDelete);
         });
 
         RecyclerView entityListRecyclerView = view.findViewById(R.id.entitylist_recyclerview);
@@ -58,5 +60,16 @@ public class DataEditFragment extends Fragment {
                 entityListAdapter.setEntities(users);
             }
         });
+    }
+
+    private <T> void showDeleteConfirmation(T entityToDelete) {
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Delete?")
+                .setMessage("Are you sure you want to delete " + entityToDelete + "?")
+                .setPositiveButton("Delete", (dialog, which) -> {
+                    viewModel.deleteEntity(entityToDelete);
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
     }
 }

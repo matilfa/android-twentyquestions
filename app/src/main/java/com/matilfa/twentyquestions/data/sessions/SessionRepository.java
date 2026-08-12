@@ -32,6 +32,20 @@ public class SessionRepository {
         this.sessionDao = sessionDao;
     }
 
+    public boolean deleteSession(@NonNull Session sessionToDelete) {
+        if (sessionToDelete.name == null) {
+            throw new IllegalArgumentException("The session to be deleted is missing a name value.");
+        }
+
+        if (sessionDao.getByName(sessionToDelete.name) == null) {
+            throw new IllegalArgumentException("Cannot find session " + sessionToDelete.name +
+                    ". Unable to delete.");
+        }
+
+        int rowsUpdated = sessionDao.deleteSession(sessionToDelete.name);
+        return rowsUpdated > 0;
+    }
+
 
     public interface InsertCallback {
         void onInsertComplete(Session newSession);

@@ -36,6 +36,7 @@ public class DataEditViewModel extends ViewModel {
      * Initializes the list of entities for the corresponding setting, decided by the {@code SettingOption}.
      * The {@code SettingOption} reflects which setting the user has selected, and the list of entities will
      * be populated with the corresponding entity type.
+     *
      * @param settingOptionForCurrentSettings
      */
     public void initEntityList(@NonNull SettingOption settingOptionForCurrentSettings) {
@@ -55,5 +56,19 @@ public class DataEditViewModel extends ViewModel {
 
     public MutableLiveData<List<User>> getAllUsers() {
         return allUsers;
+    }
+
+    public <T> void deleteEntity(T entityToDelete) {
+        TwentyQuestionsDatabase.databaseWriteExecutor.execute(() -> {
+            if (entityToDelete instanceof User u) {
+                if (userRepository.deleteUser(u)) {
+                    allUsers.postValue(userRepository.getAllUsers());
+                }
+            } else if (entityToDelete instanceof Session s) {
+                if (sessionRepository.deleteSession(s)) {
+                    allSessions.postValue(sessionRepository.getAllSessions());
+                }
+            }
+        });
     }
 }

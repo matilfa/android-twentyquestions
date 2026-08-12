@@ -27,4 +27,9 @@ public class User {
     public int hashCode() {
         return Objects.hash(userId, name);
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

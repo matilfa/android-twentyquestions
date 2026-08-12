@@ -54,6 +54,25 @@ public class UserRepository {
     public void addNewUser(@NonNull User user) {
                 userDao.insertUser(user);
     }
+
+    /**
+     * Delete a user from database.
+     * @param userToDelete
+     * @return true if the an entity has been deleted from the database, false otherwise.
+     */
+    public boolean deleteUser(@NonNull User userToDelete) {
+        if (userToDelete.name == null) {
+            throw new IllegalArgumentException("The user to be deleted is missing a name value.");
+        }
+
+        if (userDao.getByName(userToDelete.name) == null) {
+            throw new IllegalArgumentException("Cannot find user " + userToDelete.name +
+                    ". Unable to delete.");
+        }
+
+        int rowsUpdated = userDao.deleteUser(userToDelete.name);
+        return rowsUpdated > 0;
+    }
 //
 //    public User getUserByName(String name) {
 //        return null;
