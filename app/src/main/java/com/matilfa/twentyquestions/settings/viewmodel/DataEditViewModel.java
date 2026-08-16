@@ -71,4 +71,8 @@ public class DataEditViewModel extends ViewModel {
             }
         });
     }
+
+//    public interface DeleteCallback {
+//        void onSuccess();
+//    }
 }

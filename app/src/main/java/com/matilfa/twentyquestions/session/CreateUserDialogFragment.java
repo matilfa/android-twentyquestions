@@ -29,8 +29,6 @@ public class CreateUserDialogFragment extends DialogFragment implements Floating
         builder.setTitle(R.string.newUserDialogTitle);
         builder.setView(inflater.inflate(R.layout.dialog_createmember, null));
 
-//        EditText nameFld = (EditText) ;
-
         builder.setPositiveButton(R.string.createUserDialogPositiveButton, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
